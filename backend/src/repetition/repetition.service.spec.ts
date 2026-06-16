@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { RepetitionService } from './repetition.service';
 import { RepetitionRepository } from './repetition.repository';
+import { ReviewGrade as PrismaReviewGrade } from '../generated/client';
 import { ReviewGrade } from './repetition.types';
 import { NotFoundException } from '@nestjs/common/exceptions/not-found.exception';
 
@@ -56,7 +57,7 @@ describe('RepetitionService', () => {
     ).resolves.toBeDefined();
     expect(repository.update).toHaveBeenCalledWith(
       'user-1',
-      ReviewGrade.GOOD,
+      PrismaReviewGrade.GOOD,
       expect.objectContaining({
         ...updatedCardState,
         nextReviewAt: expect.any(Date),
