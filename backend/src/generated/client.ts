@@ -64,3 +64,8 @@ export type NoteTag = Prisma.NoteTagModel
  * 
  */
 export type ReviewCard = Prisma.ReviewCardModel
+/**
+ * Model ReviewHistory
+ * 
+ */
+export type ReviewHistory = Prisma.ReviewHistoryModel

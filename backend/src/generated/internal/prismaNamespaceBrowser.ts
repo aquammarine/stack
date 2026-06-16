@@ -55,7 +55,8 @@ export const ModelName = {
   Note: 'Note',
   Tag: 'Tag',
   NoteTag: 'NoteTag',
-  ReviewCard: 'ReviewCard'
+  ReviewCard: 'ReviewCard',
+  ReviewHistory: 'ReviewHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -133,6 +134,20 @@ export const ReviewCardScalarFieldEnum = {
 } as const
 
 export type ReviewCardScalarFieldEnum = (typeof ReviewCardScalarFieldEnum)[keyof typeof ReviewCardScalarFieldEnum]
+
+
+export const ReviewHistoryScalarFieldEnum = {
+  id: 'id',
+  grade: 'grade',
+  easeFactor: 'easeFactor',
+  interval: 'interval',
+  reviewedAt: 'reviewedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  reviewCardId: 'reviewCardId'
+} as const
+
+export type ReviewHistoryScalarFieldEnum = (typeof ReviewHistoryScalarFieldEnum)[keyof typeof ReviewHistoryScalarFieldEnum]
 
 
 export const SortOrder = {

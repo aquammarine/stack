@@ -258,6 +258,7 @@ export type ReviewCardWhereInput = {
   userId?: Prisma.StringFilter<"ReviewCard"> | string
   note?: Prisma.XOR<Prisma.NoteScalarRelationFilter, Prisma.NoteWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  reviewHistory?: Prisma.ReviewHistoryListRelationFilter
 }
 
 export type ReviewCardOrderByWithRelationInput = {
@@ -272,6 +273,7 @@ export type ReviewCardOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   note?: Prisma.NoteOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  reviewHistory?: Prisma.ReviewHistoryOrderByRelationAggregateInput
 }
 
 export type ReviewCardWhereUniqueInput = Prisma.AtLeast<{
@@ -289,6 +291,7 @@ export type ReviewCardWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"ReviewCard"> | string
   note?: Prisma.XOR<Prisma.NoteScalarRelationFilter, Prisma.NoteWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  reviewHistory?: Prisma.ReviewHistoryListRelationFilter
 }, "id" | "noteId">
 
 export type ReviewCardOrderByWithAggregationInput = {
@@ -333,6 +336,7 @@ export type ReviewCardCreateInput = {
   updatedAt?: Date | string
   note: Prisma.NoteCreateNestedOneWithoutReviewCardInput
   user: Prisma.UserCreateNestedOneWithoutReviewCardInput
+  reviewHistory?: Prisma.ReviewHistoryCreateNestedManyWithoutReviewCardInput
 }
 
 export type ReviewCardUncheckedCreateInput = {
@@ -345,6 +349,7 @@ export type ReviewCardUncheckedCreateInput = {
   updatedAt?: Date | string
   noteId: string
   userId: string
+  reviewHistory?: Prisma.ReviewHistoryUncheckedCreateNestedManyWithoutReviewCardInput
 }
 
 export type ReviewCardUpdateInput = {
@@ -357,6 +362,7 @@ export type ReviewCardUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NoteUpdateOneRequiredWithoutReviewCardNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutReviewCardNestedInput
+  reviewHistory?: Prisma.ReviewHistoryUpdateManyWithoutReviewCardNestedInput
 }
 
 export type ReviewCardUncheckedUpdateInput = {
@@ -369,6 +375,7 @@ export type ReviewCardUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   noteId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewHistory?: Prisma.ReviewHistoryUncheckedUpdateManyWithoutReviewCardNestedInput
 }
 
 export type ReviewCardCreateManyInput = {
@@ -468,6 +475,11 @@ export type ReviewCardSumOrderByAggregateInput = {
   repetition?: Prisma.SortOrder
 }
 
+export type ReviewCardScalarRelationFilter = {
+  is?: Prisma.ReviewCardWhereInput
+  isNot?: Prisma.ReviewCardWhereInput
+}
+
 export type ReviewCardCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.ReviewCardCreateWithoutUserInput, Prisma.ReviewCardUncheckedCreateWithoutUserInput> | Prisma.ReviewCardCreateWithoutUserInput[] | Prisma.ReviewCardUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.ReviewCardCreateOrConnectWithoutUserInput | Prisma.ReviewCardCreateOrConnectWithoutUserInput[]
@@ -558,6 +570,20 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type ReviewCardCreateNestedOneWithoutReviewHistoryInput = {
+  create?: Prisma.XOR<Prisma.ReviewCardCreateWithoutReviewHistoryInput, Prisma.ReviewCardUncheckedCreateWithoutReviewHistoryInput>
+  connectOrCreate?: Prisma.ReviewCardCreateOrConnectWithoutReviewHistoryInput
+  connect?: Prisma.ReviewCardWhereUniqueInput
+}
+
+export type ReviewCardUpdateOneRequiredWithoutReviewHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.ReviewCardCreateWithoutReviewHistoryInput, Prisma.ReviewCardUncheckedCreateWithoutReviewHistoryInput>
+  connectOrCreate?: Prisma.ReviewCardCreateOrConnectWithoutReviewHistoryInput
+  upsert?: Prisma.ReviewCardUpsertWithoutReviewHistoryInput
+  connect?: Prisma.ReviewCardWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ReviewCardUpdateToOneWithWhereWithoutReviewHistoryInput, Prisma.ReviewCardUpdateWithoutReviewHistoryInput>, Prisma.ReviewCardUncheckedUpdateWithoutReviewHistoryInput>
+}
+
 export type ReviewCardCreateWithoutUserInput = {
   id?: string
   easeFactor?: number
@@ -567,6 +593,7 @@ export type ReviewCardCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   note: Prisma.NoteCreateNestedOneWithoutReviewCardInput
+  reviewHistory?: Prisma.ReviewHistoryCreateNestedManyWithoutReviewCardInput
 }
 
 export type ReviewCardUncheckedCreateWithoutUserInput = {
@@ -578,6 +605,7 @@ export type ReviewCardUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   noteId: string
+  reviewHistory?: Prisma.ReviewHistoryUncheckedCreateNestedManyWithoutReviewCardInput
 }
 
 export type ReviewCardCreateOrConnectWithoutUserInput = {
@@ -630,6 +658,7 @@ export type ReviewCardCreateWithoutNoteInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutReviewCardInput
+  reviewHistory?: Prisma.ReviewHistoryCreateNestedManyWithoutReviewCardInput
 }
 
 export type ReviewCardUncheckedCreateWithoutNoteInput = {
@@ -641,6 +670,7 @@ export type ReviewCardUncheckedCreateWithoutNoteInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: string
+  reviewHistory?: Prisma.ReviewHistoryUncheckedCreateNestedManyWithoutReviewCardInput
 }
 
 export type ReviewCardCreateOrConnectWithoutNoteInput = {
@@ -668,6 +698,7 @@ export type ReviewCardUpdateWithoutNoteInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutReviewCardNestedInput
+  reviewHistory?: Prisma.ReviewHistoryUpdateManyWithoutReviewCardNestedInput
 }
 
 export type ReviewCardUncheckedUpdateWithoutNoteInput = {
@@ -678,6 +709,71 @@ export type ReviewCardUncheckedUpdateWithoutNoteInput = {
   nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewHistory?: Prisma.ReviewHistoryUncheckedUpdateManyWithoutReviewCardNestedInput
+}
+
+export type ReviewCardCreateWithoutReviewHistoryInput = {
+  id?: string
+  easeFactor?: number
+  interval?: number
+  repetition?: number
+  nextReviewAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  note: Prisma.NoteCreateNestedOneWithoutReviewCardInput
+  user: Prisma.UserCreateNestedOneWithoutReviewCardInput
+}
+
+export type ReviewCardUncheckedCreateWithoutReviewHistoryInput = {
+  id?: string
+  easeFactor?: number
+  interval?: number
+  repetition?: number
+  nextReviewAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  noteId: string
+  userId: string
+}
+
+export type ReviewCardCreateOrConnectWithoutReviewHistoryInput = {
+  where: Prisma.ReviewCardWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReviewCardCreateWithoutReviewHistoryInput, Prisma.ReviewCardUncheckedCreateWithoutReviewHistoryInput>
+}
+
+export type ReviewCardUpsertWithoutReviewHistoryInput = {
+  update: Prisma.XOR<Prisma.ReviewCardUpdateWithoutReviewHistoryInput, Prisma.ReviewCardUncheckedUpdateWithoutReviewHistoryInput>
+  create: Prisma.XOR<Prisma.ReviewCardCreateWithoutReviewHistoryInput, Prisma.ReviewCardUncheckedCreateWithoutReviewHistoryInput>
+  where?: Prisma.ReviewCardWhereInput
+}
+
+export type ReviewCardUpdateToOneWithWhereWithoutReviewHistoryInput = {
+  where?: Prisma.ReviewCardWhereInput
+  data: Prisma.XOR<Prisma.ReviewCardUpdateWithoutReviewHistoryInput, Prisma.ReviewCardUncheckedUpdateWithoutReviewHistoryInput>
+}
+
+export type ReviewCardUpdateWithoutReviewHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  easeFactor?: Prisma.FloatFieldUpdateOperationsInput | number
+  interval?: Prisma.IntFieldUpdateOperationsInput | number
+  repetition?: Prisma.IntFieldUpdateOperationsInput | number
+  nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  note?: Prisma.NoteUpdateOneRequiredWithoutReviewCardNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutReviewCardNestedInput
+}
+
+export type ReviewCardUncheckedUpdateWithoutReviewHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  easeFactor?: Prisma.FloatFieldUpdateOperationsInput | number
+  interval?: Prisma.IntFieldUpdateOperationsInput | number
+  repetition?: Prisma.IntFieldUpdateOperationsInput | number
+  nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  noteId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -701,6 +797,7 @@ export type ReviewCardUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NoteUpdateOneRequiredWithoutReviewCardNestedInput
+  reviewHistory?: Prisma.ReviewHistoryUpdateManyWithoutReviewCardNestedInput
 }
 
 export type ReviewCardUncheckedUpdateWithoutUserInput = {
@@ -712,6 +809,7 @@ export type ReviewCardUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   noteId?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewHistory?: Prisma.ReviewHistoryUncheckedUpdateManyWithoutReviewCardNestedInput
 }
 
 export type ReviewCardUncheckedUpdateManyWithoutUserInput = {
@@ -726,6 +824,35 @@ export type ReviewCardUncheckedUpdateManyWithoutUserInput = {
 }
 
 
+/**
+ * Count Type ReviewCardCountOutputType
+ */
+
+export type ReviewCardCountOutputType = {
+  reviewHistory: number
+}
+
+export type ReviewCardCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  reviewHistory?: boolean | ReviewCardCountOutputTypeCountReviewHistoryArgs
+}
+
+/**
+ * ReviewCardCountOutputType without action
+ */
+export type ReviewCardCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReviewCardCountOutputType
+   */
+  select?: Prisma.ReviewCardCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ReviewCardCountOutputType without action
+ */
+export type ReviewCardCountOutputTypeCountReviewHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReviewHistoryWhereInput
+}
+
 
 export type ReviewCardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -739,6 +866,8 @@ export type ReviewCardSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   userId?: boolean
   note?: boolean | Prisma.NoteDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  reviewHistory?: boolean | Prisma.ReviewCard$reviewHistoryArgs<ExtArgs>
+  _count?: boolean | Prisma.ReviewCardCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["reviewCard"]>
 
 export type ReviewCardSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -785,6 +914,8 @@ export type ReviewCardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type ReviewCardInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   note?: boolean | Prisma.NoteDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  reviewHistory?: boolean | Prisma.ReviewCard$reviewHistoryArgs<ExtArgs>
+  _count?: boolean | Prisma.ReviewCardCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ReviewCardIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   note?: boolean | Prisma.NoteDefaultArgs<ExtArgs>
@@ -800,6 +931,7 @@ export type $ReviewCardPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     note: Prisma.$NotePayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
+    reviewHistory: Prisma.$ReviewHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1207,6 +1339,7 @@ export interface Prisma__ReviewCardClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   note<T extends Prisma.NoteDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.NoteDefaultArgs<ExtArgs>>): Prisma.Prisma__NoteClient<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  reviewHistory<T extends Prisma.ReviewCard$reviewHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ReviewCard$reviewHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1643,6 +1776,30 @@ export type ReviewCardDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many ReviewCards to delete.
    */
   limit?: number
+}
+
+/**
+ * ReviewCard.reviewHistory
+ */
+export type ReviewCard$reviewHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReviewHistory
+   */
+  select?: Prisma.ReviewHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ReviewHistory
+   */
+  omit?: Prisma.ReviewHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReviewHistoryInclude<ExtArgs> | null
+  where?: Prisma.ReviewHistoryWhereInput
+  orderBy?: Prisma.ReviewHistoryOrderByWithRelationInput | Prisma.ReviewHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.ReviewHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReviewHistoryScalarFieldEnum | Prisma.ReviewHistoryScalarFieldEnum[]
 }
 
 /**
