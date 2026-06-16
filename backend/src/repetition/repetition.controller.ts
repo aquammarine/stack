@@ -2,8 +2,9 @@ import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { RepetitionService } from './repetition.service';
 import { CurrentUser } from '../common/decorators/curent-user.decorator';
 import type { JwtPayload } from '../common/types/user.types';
-import { ReviewGrade } from '../generated/client';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
+import { RepetitionMapper } from './repetition.mapper';
+import { ReviewDto } from './dto/review.dto';
 
 @Controller('repetition')
 @UseGuards(JwtAuthGuard)
@@ -19,9 +20,9 @@ export class RepetitionController {
   update(
     @CurrentUser() user: JwtPayload,
     @Param('cardId') cardId: string,
-    @Body('grade') grade: ReviewGrade,
+    @Body() dto: ReviewDto,
   ) {
-    return this.repetitionService.update(grade, user.id, cardId);
+    return this.repetitionService.update(dto.grade, user.id, cardId);
   }
 
   @Get('today')

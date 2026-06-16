@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { RepetitionRepository } from './repetition.repository';
 import { calculateNextReview } from './sm2.algorithm';
-import { ReviewGrade } from './repetition.types';
+import { ReviewGrade } from '../generated/client';
 import { RepetitionMapper } from './repetition.mapper';
 
 @Injectable()
