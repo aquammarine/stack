@@ -1,4 +1,4 @@
-export type ReviewGrade = 0 | 1 | 2 | 3;
+import { ReviewGrade } from './repetition.types';
 
 interface CardState {
   easeFactor: number;
@@ -8,7 +8,7 @@ interface CardState {
 
 export function calculateNextReview(card: CardState, grade: ReviewGrade) {
   let { easeFactor, repetition, interval } = card;
-  if (grade === 0) {
+  if (grade === ReviewGrade.AGAIN) {
     repetition = 0;
     interval = 1;
   } else {

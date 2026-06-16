@@ -4,10 +4,9 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { RepetitionRepository } from './repetition.repository';
-import { UpdateRepetitionDto } from './dto/update-repetition-dto';
 import { calculateNextReview } from './sm2.algorithm';
-import { ReviewGrade } from '../generated/client';
-import { grades, ReviewCardMapper } from './repetition.mapper';
+import { ReviewGrade } from './repetition.types';
+import { ReviewCardMapper } from './repetition.mapper';
 
 @Injectable()
 export class RepetitionService {
@@ -44,7 +43,7 @@ export class RepetitionService {
         interval: cardState.interval ?? 0,
         repetition: cardState.repetition ?? 0,
       },
-      grades[grade],
+      grade,
     );
 
     const updateState = {

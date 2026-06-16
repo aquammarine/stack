@@ -1,13 +1,6 @@
 import { Prisma, ReviewGrade } from '../generated/client';
 import { NotesMapper } from '../notes/notes.mapper';
 
-export const grades = {
-  [ReviewGrade.AGAIN]: 0,
-  [ReviewGrade.HARD]: 1,
-  [ReviewGrade.GOOD]: 2,
-  [ReviewGrade.EASY]: 3,
-} as const;
-
 export type ReviewCardWithNote = Prisma.ReviewCardGetPayload<{
   include: {
     note: {

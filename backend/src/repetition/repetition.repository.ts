@@ -1,6 +1,7 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
-import { Prisma, ReviewGrade } from '../generated/client';
+import { Prisma } from '../generated/client';
+import { ReviewGrade } from './repetition.types';
 
 interface UpdateReviewCardData {
   id: string;
