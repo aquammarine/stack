@@ -47,10 +47,12 @@ export class RepetitionService {
       grades[grade],
     );
 
-    return this.repetitionRepository.update(userId, {
+    const updateState = {
       id: cardId,
       ...newCardState,
-    });
+    };
+
+    return this.repetitionRepository.update(userId, grade, updateState);
   }
 
   async getDailyQueue(userId: string) {

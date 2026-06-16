@@ -56,6 +56,7 @@ describe('RepetitionService', () => {
     ).resolves.toBeDefined();
     expect(repository.update).toHaveBeenCalledWith(
       'user-1',
+      ReviewGrade.GOOD,
       expect.objectContaining({
         ...updatedCardState,
         nextReviewAt: expect.any(Date),
