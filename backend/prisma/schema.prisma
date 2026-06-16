@@ -1,0 +1,139 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  moduleFormat = "cjs"
+  output   = "../src/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum NoteType {
+  TEXT
+  LINK
+  QUOTE
+}
+
+enum Color {
+  RED
+  ORANGE
+  YELLOW
+  GREEN
+  BLUE
+  CYAN
+  PURPLE
+}
+
+enum ReviewGrade {
+  AGAIN
+  HARD
+  GOOD
+  EASY
+}
+
+model User {
+  id           String @id @default(uuid())
+  email        String @unique
+  passwordHash String?
+  name         String
+  googleId     String?
+  avatarUrl    String?
+  notes        Note[]
+  tags         Tag[]
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  ReviewCard   ReviewCard[]
+
+  @@map("users")
+}
+
+model Note {
+  id            String   @id @default(uuid())
+  title         String
+  noteType      NoteType @default(TEXT)
+  content       String
+  sourceUrl     String?
+
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  tag           NoteTag[]
+  ReviewCard    ReviewCard?
+
+  @@index([userId])
+  @@index([userId, createdAt])
+
+  @@unique([id, userId])
+  
+  @@map("notes")
+}
+
+model Tag {
+  id     String @id @default(uuid())
+  name   String
+  color  Color  @default(RED)
+  userId String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  note   NoteTag[]
+
+  @@unique([userId, name])
+  @@map("tags")
+}
+
+model NoteTag {
+  noteId String
+  tagId  String
+  note   Note   @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  tag    Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([noteId, tagId])
+  @@map("note_tags")
+}
+
+model ReviewCard {
+  id           String   @id @default(uuid())
+  easeFactor   Float    @default(2.5)
+  interval     Int      @default(1)
+  repetition   Int      @default(0)
+  nextReviewAt DateTime @default(now())
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  noteId       String   @unique
+  note         Note     @relation(fields: [noteId], references: [id], onDelete: Cascade)
+
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  reviewHistory ReviewHistory[]
+
+  @@map("review_cards")
+}
+
+model ReviewHistory {
+  id           String      @id @default(uuid())
+  grade        ReviewGrade
+  easeFactor   Float
+  interval     Int
+  reviewedAt   DateTime    @default(now())
+
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  reviewCardId String
+  reviewCard   ReviewCard  @relation(fields: [reviewCardId], references: [id], onDelete: Cascade)
+
+  @@map("review_history")
+}

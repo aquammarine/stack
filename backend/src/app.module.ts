@@ -1,0 +1,27 @@
+import { Module } from '@nestjs/common';
+import { schema } from './config/configuration';
+import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { RedisModule } from './redis/redis.module';
+import { NotesModule } from './notes/notes.module';
+import { PrismaModule } from './prisma/prisma.module';
+import { TagsModule } from './tags/tags.module';
+import { RepetitionModule } from './repetition/repetition.module';
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      validationSchema: schema,
+    }),
+    NotesModule,
+    PrismaModule,
+    AuthModule,
+    UsersModule,
+    RedisModule,
+    TagsModule,
+    RepetitionModule,
+  ],
+})
+export class AppModule {}
