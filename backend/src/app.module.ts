@@ -8,6 +8,8 @@ import { NotesModule } from './notes/notes.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { TagsModule } from './tags/tags.module';
 import { RepetitionModule } from './repetition/repetition.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -15,6 +17,7 @@ import { RepetitionModule } from './repetition/repetition.module';
       isGlobal: true,
       validationSchema: schema,
     }),
+    ScheduleModule.forRoot(),
     NotesModule,
     PrismaModule,
     AuthModule,
@@ -22,6 +25,7 @@ import { RepetitionModule } from './repetition/repetition.module';
     RedisModule,
     TagsModule,
     RepetitionModule,
+    NotificationsModule,
   ],
 })
 export class AppModule {}
