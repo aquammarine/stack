@@ -6,7 +6,7 @@ import {
 import { RepetitionRepository } from './repetition.repository';
 import { calculateNextReview } from './sm2.algorithm';
 import { ReviewGrade } from './repetition.types';
-import { ReviewCardMapper } from './repetition.mapper';
+import { RepetitionMapper } from './repetition.mapper';
 
 @Injectable()
 export class RepetitionService {
@@ -59,6 +59,6 @@ export class RepetitionService {
       throw new BadRequestException('userId is missing');
     }
     const dailyQueue = await this.repetitionRepository.getDailyQueue(userId);
-    return ReviewCardMapper.toResponseList(dailyQueue);
+    return RepetitionMapper.toResponseList(dailyQueue);
   }
 }
