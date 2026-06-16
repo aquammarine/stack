@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { RepetitionRepository } from './repetition.repository';
 import { calculateNextReview } from './sm2.algorithm';
-import { ReviewGrade } from '../generated/client';
+import { ReviewGrade } from './repetition.types';
 import { RepetitionMapper } from './repetition.mapper';
 
 @Injectable()
@@ -51,7 +51,9 @@ export class RepetitionService {
       ...newCardState,
     };
 
-    return this.repetitionRepository.update(userId, grade, updateState);
+    const prismaGrade = RepetitionMapper.toPrisma(grade);
+
+    return this.repetitionRepository.update(userId, prismaGrade, updateState);
   }
 
   async getDailyQueue(userId: string) {

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { RepetitionService } from './repetition.service';
 import { RepetitionRepository } from './repetition.repository';
-import { ReviewGrade } from '../generated/client';
+import { ReviewGrade } from './repetition.types';
 import { NotFoundException } from '@nestjs/common/exceptions/not-found.exception';
 
 describe('RepetitionService', () => {

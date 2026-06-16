@@ -1,4 +1,4 @@
-import { ReviewGrade } from '../generated/client';
+import { ReviewGrade } from './repetition.types';
 
 interface CardState {
   easeFactor: number;
@@ -9,14 +9,12 @@ interface CardState {
 const numericMap = { AGAIN: 0, HARD: 1, GOOD: 2, EASY: 3 };
 
 export function calculateNextReview(card: CardState, grade: ReviewGrade) {
-  const numbericGrade = numericMap[grade];
   let { easeFactor, repetition, interval } = card;
   if (grade === ReviewGrade.AGAIN) {
     repetition = 0;
     interval = 1;
   } else {
-    easeFactor +=
-      0.1 - (3 - numbericGrade) * (0.08 + (3 - numbericGrade) * 0.02);
+    easeFactor += 0.1 - (3 - grade) * (0.08 + (3 - grade) * 0.02);
     easeFactor = Math.max(1.3, easeFactor);
 
     if (repetition === 0) interval = 1;

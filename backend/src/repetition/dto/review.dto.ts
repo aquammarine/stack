@@ -1,5 +1,5 @@
 import { IsEnum } from 'class-validator';
-import { ReviewGrade } from '../../generated/enums';
+import { ReviewGrade } from '../repetition.types';
 
 export class ReviewDto {
   @IsEnum(ReviewGrade)

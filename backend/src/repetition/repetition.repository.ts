@@ -1,6 +1,6 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
-import { Prisma, ReviewGrade } from '../generated/client';
+import { Prisma, ReviewGrade as PrismaReviewGrade } from '../generated/client';
 
 interface UpdateReviewCardData {
   id: string;
@@ -41,7 +41,11 @@ export class RepetitionRepository {
     });
   }
 
-  async update(userId: string, grade: ReviewGrade, data: UpdateReviewCardData) {
+  async update(
+    userId: string,
+    prismaGrade: PrismaReviewGrade,
+    data: UpdateReviewCardData,
+  ) {
     const { id, ...updateData } = data;
     try {
       return await this.prisma.reviewCard.update({
@@ -50,7 +54,7 @@ export class RepetitionRepository {
           ...updateData,
           reviewHistory: {
             create: {
-              grade,
+              grade: prismaGrade,
               easeFactor: updateData.easeFactor,
               interval: updateData.interval,
             },

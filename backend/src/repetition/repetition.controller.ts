@@ -3,7 +3,6 @@ import { RepetitionService } from './repetition.service';
 import { CurrentUser } from '../common/decorators/curent-user.decorator';
 import type { JwtPayload } from '../common/types/user.types';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
-import { RepetitionMapper } from './repetition.mapper';
 import { ReviewDto } from './dto/review.dto';
 
 @Controller('repetition')
