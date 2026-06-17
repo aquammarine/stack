@@ -11,6 +11,7 @@ import { RepetitionModule } from './repetition/repetition.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { NotificationsModule } from './notifications/notifications.module';
 import { MailModule } from './mail/mail.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { MailModule } from './mail/mail.module';
     RepetitionModule,
     NotificationsModule,
     MailModule,
+    SearchModule,
   ],
 })
 export class AppModule {}
