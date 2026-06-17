@@ -1,10 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
+import { NotificationRepository } from './notifications.repository';
 
 @Injectable()
 export class NotificationsService {
-  @Cron('0 9 * * *')
+  constructor(
+    private readonly notificationRepository: NotificationRepository,
+  ) {}
+
+  @Cron('* * * * *')
   async handleDailyReminders() {
-    console.log('cron');
+    const users = await this.notificationRepository.getUserWithPendingReview();
+
+    if (users.length === 0) {
+      console.log('[Cron] No reminders for today');
+    }
+
+    users.forEach((user) => {
+      const count = user._count.ReviewCard;
+      console.log(
+        `[Notification] Hello ${user.name}! You have ${count} reminders of repetition for today.`,
+      );
+    });
   }
 }
