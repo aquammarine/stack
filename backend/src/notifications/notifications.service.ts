@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { NotificationRepository } from './notifications.repository';
+import { MailService } from '../mail/mail.service';
 
 @Injectable()
 export class NotificationsService {
   constructor(
     private readonly notificationRepository: NotificationRepository,
+    private readonly mailService: MailService,
   ) {}
 
   @Cron('* * * * *')
@@ -18,9 +20,7 @@ export class NotificationsService {
 
     users.forEach((user) => {
       const count = user._count.ReviewCard;
-      console.log(
-        `[Notification] Hello ${user.name}! You have ${count} reminders of repetition for today.`,
-      );
+      this.mailService.sendDailyReminder(user.email, user.name, count);
     });
   }
 }

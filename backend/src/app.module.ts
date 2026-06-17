@@ -10,6 +10,7 @@ import { TagsModule } from './tags/tags.module';
 import { RepetitionModule } from './repetition/repetition.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { NotificationsModule } from './notifications/notifications.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { NotificationsModule } from './notifications/notifications.module';
     TagsModule,
     RepetitionModule,
     NotificationsModule,
+    MailModule,
   ],
 })
 export class AppModule {}
