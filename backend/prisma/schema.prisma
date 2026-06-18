@@ -102,20 +102,20 @@ model NoteTag {
 }
 
 model ReviewCard {
-  id           String   @id @default(uuid())
-  easeFactor   Float    @default(2.5)
-  interval     Int      @default(1)
-  repetition   Int      @default(0)
-  nextReviewAt DateTime @default(now())
+  id            String   @id @default(uuid())
+  easeFactor    Float    @default(2.5)
+  interval      Int      @default(1)
+  repetitions   Int      @default(0)
+  nextReviewAt  DateTime @default(now())
 
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-  noteId       String   @unique
-  note         Note     @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  noteId        String   @unique
+  note          Note     @relation(fields: [noteId], references: [id], onDelete: Cascade)
 
-  userId       String
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   reviewHistory ReviewHistory[]
 
