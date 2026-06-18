@@ -3,30 +3,30 @@ import { ReviewGrade } from './repetition.types';
 interface CardState {
   easeFactor: number;
   interval: number;
-  repetition: number;
+  repetitions: number;
 }
 
 const numericMap = { AGAIN: 0, HARD: 1, GOOD: 2, EASY: 3 };
 
 export function calculateNextReview(card: CardState, grade: ReviewGrade) {
-  let { easeFactor, repetition, interval } = card;
+  let { easeFactor, repetitions, interval } = card;
   if (grade === ReviewGrade.AGAIN) {
-    repetition = 0;
+    repetitions = 0;
     interval = 1;
   } else {
     easeFactor += 0.1 - (3 - grade) * (0.08 + (3 - grade) * 0.02);
     easeFactor = Math.max(1.3, easeFactor);
 
-    if (repetition === 0) interval = 1;
-    else if (repetition === 1) interval = 6;
+    if (repetitions === 0) interval = 1;
+    else if (repetitions === 1) interval = 6;
     else interval = Math.round(interval * easeFactor);
 
-    repetition += 1;
+    repetitions += 1;
   }
 
   const nextReviewAt = new Date();
   nextReviewAt.setDate(nextReviewAt.getDate() + interval);
   nextReviewAt.setHours(0, 0, 0, 0);
 
-  return { easeFactor, interval, repetition, nextReviewAt };
+  return { easeFactor, interval, repetitions, nextReviewAt };
 }

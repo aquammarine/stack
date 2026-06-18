@@ -39,13 +39,13 @@ describe('RepetitionService', () => {
       id: 'card-1',
       easeFactor: 2.5,
       interval: 0,
-      repetition: 0,
+      repetitions: 0,
     };
 
     const updatedCardState = {
       ...cardState,
       interval: 1,
-      repetition: 1,
+      repetitions: 1,
       nextReviewAt: new Date(),
     };
 

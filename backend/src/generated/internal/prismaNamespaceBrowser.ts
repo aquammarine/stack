@@ -125,7 +125,7 @@ export const ReviewCardScalarFieldEnum = {
   id: 'id',
   easeFactor: 'easeFactor',
   interval: 'interval',
-  repetition: 'repetition',
+  repetitions: 'repetitions',
   nextReviewAt: 'nextReviewAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',

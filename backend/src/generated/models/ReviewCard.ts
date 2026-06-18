@@ -29,20 +29,20 @@ export type AggregateReviewCard = {
 export type ReviewCardAvgAggregateOutputType = {
   easeFactor: number | null
   interval: number | null
-  repetition: number | null
+  repetitions: number | null
 }
 
 export type ReviewCardSumAggregateOutputType = {
   easeFactor: number | null
   interval: number | null
-  repetition: number | null
+  repetitions: number | null
 }
 
 export type ReviewCardMinAggregateOutputType = {
   id: string | null
   easeFactor: number | null
   interval: number | null
-  repetition: number | null
+  repetitions: number | null
   nextReviewAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -54,7 +54,7 @@ export type ReviewCardMaxAggregateOutputType = {
   id: string | null
   easeFactor: number | null
   interval: number | null
-  repetition: number | null
+  repetitions: number | null
   nextReviewAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -66,7 +66,7 @@ export type ReviewCardCountAggregateOutputType = {
   id: number
   easeFactor: number
   interval: number
-  repetition: number
+  repetitions: number
   nextReviewAt: number
   createdAt: number
   updatedAt: number
@@ -79,20 +79,20 @@ export type ReviewCardCountAggregateOutputType = {
 export type ReviewCardAvgAggregateInputType = {
   easeFactor?: true
   interval?: true
-  repetition?: true
+  repetitions?: true
 }
 
 export type ReviewCardSumAggregateInputType = {
   easeFactor?: true
   interval?: true
-  repetition?: true
+  repetitions?: true
 }
 
 export type ReviewCardMinAggregateInputType = {
   id?: true
   easeFactor?: true
   interval?: true
-  repetition?: true
+  repetitions?: true
   nextReviewAt?: true
   createdAt?: true
   updatedAt?: true
@@ -104,7 +104,7 @@ export type ReviewCardMaxAggregateInputType = {
   id?: true
   easeFactor?: true
   interval?: true
-  repetition?: true
+  repetitions?: true
   nextReviewAt?: true
   createdAt?: true
   updatedAt?: true
@@ -116,7 +116,7 @@ export type ReviewCardCountAggregateInputType = {
   id?: true
   easeFactor?: true
   interval?: true
-  repetition?: true
+  repetitions?: true
   nextReviewAt?: true
   createdAt?: true
   updatedAt?: true
@@ -215,7 +215,7 @@ export type ReviewCardGroupByOutputType = {
   id: string
   easeFactor: number
   interval: number
-  repetition: number
+  repetitions: number
   nextReviewAt: Date
   createdAt: Date
   updatedAt: Date
@@ -250,7 +250,7 @@ export type ReviewCardWhereInput = {
   id?: Prisma.StringFilter<"ReviewCard"> | string
   easeFactor?: Prisma.FloatFilter<"ReviewCard"> | number
   interval?: Prisma.IntFilter<"ReviewCard"> | number
-  repetition?: Prisma.IntFilter<"ReviewCard"> | number
+  repetitions?: Prisma.IntFilter<"ReviewCard"> | number
   nextReviewAt?: Prisma.DateTimeFilter<"ReviewCard"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"ReviewCard"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ReviewCard"> | Date | string
@@ -265,7 +265,7 @@ export type ReviewCardOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   easeFactor?: Prisma.SortOrder
   interval?: Prisma.SortOrder
-  repetition?: Prisma.SortOrder
+  repetitions?: Prisma.SortOrder
   nextReviewAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -284,7 +284,7 @@ export type ReviewCardWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ReviewCardWhereInput | Prisma.ReviewCardWhereInput[]
   easeFactor?: Prisma.FloatFilter<"ReviewCard"> | number
   interval?: Prisma.IntFilter<"ReviewCard"> | number
-  repetition?: Prisma.IntFilter<"ReviewCard"> | number
+  repetitions?: Prisma.IntFilter<"ReviewCard"> | number
   nextReviewAt?: Prisma.DateTimeFilter<"ReviewCard"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"ReviewCard"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ReviewCard"> | Date | string
@@ -298,7 +298,7 @@ export type ReviewCardOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   easeFactor?: Prisma.SortOrder
   interval?: Prisma.SortOrder
-  repetition?: Prisma.SortOrder
+  repetitions?: Prisma.SortOrder
   nextReviewAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -318,7 +318,7 @@ export type ReviewCardScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"ReviewCard"> | string
   easeFactor?: Prisma.FloatWithAggregatesFilter<"ReviewCard"> | number
   interval?: Prisma.IntWithAggregatesFilter<"ReviewCard"> | number
-  repetition?: Prisma.IntWithAggregatesFilter<"ReviewCard"> | number
+  repetitions?: Prisma.IntWithAggregatesFilter<"ReviewCard"> | number
   nextReviewAt?: Prisma.DateTimeWithAggregatesFilter<"ReviewCard"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ReviewCard"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ReviewCard"> | Date | string
@@ -330,7 +330,7 @@ export type ReviewCardCreateInput = {
   id?: string
   easeFactor?: number
   interval?: number
-  repetition?: number
+  repetitions?: number
   nextReviewAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -343,7 +343,7 @@ export type ReviewCardUncheckedCreateInput = {
   id?: string
   easeFactor?: number
   interval?: number
-  repetition?: number
+  repetitions?: number
   nextReviewAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -356,7 +356,7 @@ export type ReviewCardUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   easeFactor?: Prisma.FloatFieldUpdateOperationsInput | number
   interval?: Prisma.IntFieldUpdateOperationsInput | number
-  repetition?: Prisma.IntFieldUpdateOperationsInput | number
+  repetitions?: Prisma.IntFieldUpdateOperationsInput | number
   nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -369,7 +369,7 @@ export type ReviewCardUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   easeFactor?: Prisma.FloatFieldUpdateOperationsInput | number
   interval?: Prisma.IntFieldUpdateOperationsInput | number
-  repetition?: Prisma.IntFieldUpdateOperationsInput | number
+  repetitions?: Prisma.IntFieldUpdateOperationsInput | number
   nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -382,7 +382,7 @@ export type ReviewCardCreateManyInput = {
   id?: string
   easeFactor?: number
   interval?: number
-  repetition?: number
+  repetitions?: number
   nextReviewAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -394,7 +394,7 @@ export type ReviewCardUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   easeFactor?: Prisma.FloatFieldUpdateOperationsInput | number
   interval?: Prisma.IntFieldUpdateOperationsInput | number
-  repetition?: Prisma.IntFieldUpdateOperationsInput | number
+  repetitions?: Prisma.IntFieldUpdateOperationsInput | number
   nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -404,7 +404,7 @@ export type ReviewCardUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   easeFactor?: Prisma.FloatFieldUpdateOperationsInput | number
   interval?: Prisma.IntFieldUpdateOperationsInput | number
-  repetition?: Prisma.IntFieldUpdateOperationsInput | number
+  repetitions?: Prisma.IntFieldUpdateOperationsInput | number
   nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -431,7 +431,7 @@ export type ReviewCardCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   easeFactor?: Prisma.SortOrder
   interval?: Prisma.SortOrder
-  repetition?: Prisma.SortOrder
+  repetitions?: Prisma.SortOrder
   nextReviewAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -442,14 +442,14 @@ export type ReviewCardCountOrderByAggregateInput = {
 export type ReviewCardAvgOrderByAggregateInput = {
   easeFactor?: Prisma.SortOrder
   interval?: Prisma.SortOrder
-  repetition?: Prisma.SortOrder
+  repetitions?: Prisma.SortOrder
 }
 
 export type ReviewCardMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   easeFactor?: Prisma.SortOrder
   interval?: Prisma.SortOrder
-  repetition?: Prisma.SortOrder
+  repetitions?: Prisma.SortOrder
   nextReviewAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -461,7 +461,7 @@ export type ReviewCardMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   easeFactor?: Prisma.SortOrder
   interval?: Prisma.SortOrder
-  repetition?: Prisma.SortOrder
+  repetitions?: Prisma.SortOrder
   nextReviewAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -472,7 +472,7 @@ export type ReviewCardMinOrderByAggregateInput = {
 export type ReviewCardSumOrderByAggregateInput = {
   easeFactor?: Prisma.SortOrder
   interval?: Prisma.SortOrder
-  repetition?: Prisma.SortOrder
+  repetitions?: Prisma.SortOrder
 }
 
 export type ReviewCardScalarRelationFilter = {
@@ -588,7 +588,7 @@ export type ReviewCardCreateWithoutUserInput = {
   id?: string
   easeFactor?: number
   interval?: number
-  repetition?: number
+  repetitions?: number
   nextReviewAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -600,7 +600,7 @@ export type ReviewCardUncheckedCreateWithoutUserInput = {
   id?: string
   easeFactor?: number
   interval?: number
-  repetition?: number
+  repetitions?: number
   nextReviewAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -641,7 +641,7 @@ export type ReviewCardScalarWhereInput = {
   id?: Prisma.StringFilter<"ReviewCard"> | string
   easeFactor?: Prisma.FloatFilter<"ReviewCard"> | number
   interval?: Prisma.IntFilter<"ReviewCard"> | number
-  repetition?: Prisma.IntFilter<"ReviewCard"> | number
+  repetitions?: Prisma.IntFilter<"ReviewCard"> | number
   nextReviewAt?: Prisma.DateTimeFilter<"ReviewCard"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"ReviewCard"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ReviewCard"> | Date | string
@@ -653,7 +653,7 @@ export type ReviewCardCreateWithoutNoteInput = {
   id?: string
   easeFactor?: number
   interval?: number
-  repetition?: number
+  repetitions?: number
   nextReviewAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -665,7 +665,7 @@ export type ReviewCardUncheckedCreateWithoutNoteInput = {
   id?: string
   easeFactor?: number
   interval?: number
-  repetition?: number
+  repetitions?: number
   nextReviewAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -693,7 +693,7 @@ export type ReviewCardUpdateWithoutNoteInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   easeFactor?: Prisma.FloatFieldUpdateOperationsInput | number
   interval?: Prisma.IntFieldUpdateOperationsInput | number
-  repetition?: Prisma.IntFieldUpdateOperationsInput | number
+  repetitions?: Prisma.IntFieldUpdateOperationsInput | number
   nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -705,7 +705,7 @@ export type ReviewCardUncheckedUpdateWithoutNoteInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   easeFactor?: Prisma.FloatFieldUpdateOperationsInput | number
   interval?: Prisma.IntFieldUpdateOperationsInput | number
-  repetition?: Prisma.IntFieldUpdateOperationsInput | number
+  repetitions?: Prisma.IntFieldUpdateOperationsInput | number
   nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -717,7 +717,7 @@ export type ReviewCardCreateWithoutReviewHistoryInput = {
   id?: string
   easeFactor?: number
   interval?: number
-  repetition?: number
+  repetitions?: number
   nextReviewAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -729,7 +729,7 @@ export type ReviewCardUncheckedCreateWithoutReviewHistoryInput = {
   id?: string
   easeFactor?: number
   interval?: number
-  repetition?: number
+  repetitions?: number
   nextReviewAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -757,7 +757,7 @@ export type ReviewCardUpdateWithoutReviewHistoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   easeFactor?: Prisma.FloatFieldUpdateOperationsInput | number
   interval?: Prisma.IntFieldUpdateOperationsInput | number
-  repetition?: Prisma.IntFieldUpdateOperationsInput | number
+  repetitions?: Prisma.IntFieldUpdateOperationsInput | number
   nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -769,7 +769,7 @@ export type ReviewCardUncheckedUpdateWithoutReviewHistoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   easeFactor?: Prisma.FloatFieldUpdateOperationsInput | number
   interval?: Prisma.IntFieldUpdateOperationsInput | number
-  repetition?: Prisma.IntFieldUpdateOperationsInput | number
+  repetitions?: Prisma.IntFieldUpdateOperationsInput | number
   nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -781,7 +781,7 @@ export type ReviewCardCreateManyUserInput = {
   id?: string
   easeFactor?: number
   interval?: number
-  repetition?: number
+  repetitions?: number
   nextReviewAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -792,7 +792,7 @@ export type ReviewCardUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   easeFactor?: Prisma.FloatFieldUpdateOperationsInput | number
   interval?: Prisma.IntFieldUpdateOperationsInput | number
-  repetition?: Prisma.IntFieldUpdateOperationsInput | number
+  repetitions?: Prisma.IntFieldUpdateOperationsInput | number
   nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -804,7 +804,7 @@ export type ReviewCardUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   easeFactor?: Prisma.FloatFieldUpdateOperationsInput | number
   interval?: Prisma.IntFieldUpdateOperationsInput | number
-  repetition?: Prisma.IntFieldUpdateOperationsInput | number
+  repetitions?: Prisma.IntFieldUpdateOperationsInput | number
   nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -816,7 +816,7 @@ export type ReviewCardUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   easeFactor?: Prisma.FloatFieldUpdateOperationsInput | number
   interval?: Prisma.IntFieldUpdateOperationsInput | number
-  repetition?: Prisma.IntFieldUpdateOperationsInput | number
+  repetitions?: Prisma.IntFieldUpdateOperationsInput | number
   nextReviewAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -858,7 +858,7 @@ export type ReviewCardSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   easeFactor?: boolean
   interval?: boolean
-  repetition?: boolean
+  repetitions?: boolean
   nextReviewAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -874,7 +874,7 @@ export type ReviewCardSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   easeFactor?: boolean
   interval?: boolean
-  repetition?: boolean
+  repetitions?: boolean
   nextReviewAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -888,7 +888,7 @@ export type ReviewCardSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   easeFactor?: boolean
   interval?: boolean
-  repetition?: boolean
+  repetitions?: boolean
   nextReviewAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -902,7 +902,7 @@ export type ReviewCardSelectScalar = {
   id?: boolean
   easeFactor?: boolean
   interval?: boolean
-  repetition?: boolean
+  repetitions?: boolean
   nextReviewAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -910,7 +910,7 @@ export type ReviewCardSelectScalar = {
   userId?: boolean
 }
 
-export type ReviewCardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "easeFactor" | "interval" | "repetition" | "nextReviewAt" | "createdAt" | "updatedAt" | "noteId" | "userId", ExtArgs["result"]["reviewCard"]>
+export type ReviewCardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "easeFactor" | "interval" | "repetitions" | "nextReviewAt" | "createdAt" | "updatedAt" | "noteId" | "userId", ExtArgs["result"]["reviewCard"]>
 export type ReviewCardInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   note?: boolean | Prisma.NoteDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -937,7 +937,7 @@ export type $ReviewCardPayload<ExtArgs extends runtime.Types.Extensions.Internal
     id: string
     easeFactor: number
     interval: number
-    repetition: number
+    repetitions: number
     nextReviewAt: Date
     createdAt: Date
     updatedAt: Date
@@ -1372,7 +1372,7 @@ export interface ReviewCardFieldRefs {
   readonly id: Prisma.FieldRef<"ReviewCard", 'String'>
   readonly easeFactor: Prisma.FieldRef<"ReviewCard", 'Float'>
   readonly interval: Prisma.FieldRef<"ReviewCard", 'Int'>
-  readonly repetition: Prisma.FieldRef<"ReviewCard", 'Int'>
+  readonly repetitions: Prisma.FieldRef<"ReviewCard", 'Int'>
   readonly nextReviewAt: Prisma.FieldRef<"ReviewCard", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"ReviewCard", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ReviewCard", 'DateTime'>

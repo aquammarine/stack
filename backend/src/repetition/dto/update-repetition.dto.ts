@@ -1,6 +1,6 @@
 import { IsDate, IsNumber, IsString, IsNotEmpty } from 'class-validator';
 
-export class UpdateRepetitionDto {
+export class UpdatesDto {
   @IsString()
   @IsNotEmpty()
   id!: string;
@@ -12,7 +12,7 @@ export class UpdateRepetitionDto {
   interval?: number;
 
   @IsNumber()
-  repetition?: number;
+  repetitions?: number;
 
   @IsDate()
   nextReviewAt?: Date;

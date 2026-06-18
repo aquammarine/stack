@@ -31,7 +31,7 @@ export class RepetitionMapper {
       id: card.id,
       easeFactor: card.easeFactor,
       interval: card.interval,
-      repetition: card.repetition,
+      repetitions: card.repetitions,
       nextReviewAt: card.nextReviewAt,
       note: NotesMapper.toResponse(card.note),
       createdAt: card.createdAt,

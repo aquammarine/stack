@@ -41,7 +41,7 @@ export class RepetitionService {
       {
         easeFactor: cardState.easeFactor ?? 2.5,
         interval: cardState.interval ?? 0,
-        repetition: cardState.repetition ?? 0,
+        repetitions: cardState.repetitions ?? 0,
       },
       grade,
     );

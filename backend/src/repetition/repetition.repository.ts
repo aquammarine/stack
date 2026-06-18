@@ -6,7 +6,7 @@ interface UpdateReviewCardData {
   id: string;
   easeFactor: number;
   interval: number;
-  repetition: number;
+  repetitions: number;
   nextReviewAt: Date;
 }
 

@@ -1,21 +1,21 @@
 import { calculateNextReview } from './sm2.algorithm';
 
 describe('SM-2', () => {
-  const initial = { easeFactor: 2.5, interval: 1, repetition: 0 };
+  const initial = { easeFactor: 2.5, interval: 1, repetitions: 0 };
 
   it('should reset card when grade is 0', () => {
     const result = calculateNextReview(
-      { easeFactor: 2.5, interval: 15, repetition: 3 },
+      { easeFactor: 2.5, interval: 15, repetitions: 3 },
       0,
     );
-    expect(result.repetition).toBe(0);
+    expect(result.repetitions).toBe(0);
     expect(result.interval).toBe(1);
   });
 
   it('should set interval to 1 on first successful review', () => {
     const result = calculateNextReview(initial, 2);
     expect(result.interval).toBe(1);
-    expect(result.repetition).toBe(1);
+    expect(result.repetitions).toBe(1);
   });
 
   it('should set interval to 6 on second successful review', () => {
@@ -33,7 +33,7 @@ describe('SM-2', () => {
   });
 
   it('should increase interval on easy grage', () => {
-    const card = { easeFactor: 2.5, interval: 6, repetition: 2 };
+    const card = { easeFactor: 2.5, interval: 6, repetitions: 2 };
     const result = calculateNextReview(card, 3);
     expect(result.interval).toBeGreaterThan(6);
   });
