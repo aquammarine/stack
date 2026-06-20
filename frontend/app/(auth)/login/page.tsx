@@ -1,5 +1,11 @@
+import { Button } from "@/components/ui/button";
+
 const LoginPage = () => {
-  return <>Login page</>;
+  return (
+    <>
+      <Button>Test button</Button>
+    </>
+  );
 };
 
 export default LoginPage;
