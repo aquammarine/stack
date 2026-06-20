@@ -18,9 +18,18 @@ export class NotificationsService {
       console.log('[Cron] No reminders for today');
     }
 
-    users.forEach((user) => {
-      const count = user._count.ReviewCard;
-      this.mailService.sendDailyReminder(user.email, user.name, count);
-    });
+    await Promise.all(
+      users.map((user) => {
+        try {
+          this.mailService.sendDailyReminder(
+            user.email,
+            user.name,
+            user._count.ReviewCard,
+          );
+        } catch (error) {
+          console.error(`Failed to send reminder to ${user.email}`, error);
+        }
+      }),
+    );
   }
 }
