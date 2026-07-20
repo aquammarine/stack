@@ -61,7 +61,12 @@ export class AuthService {
 
     const refreshToken = crypto.randomUUID();
 
-    await this.redis.set(`refresh:${refreshToken}`, userId, 30 * 24 * 60 * 60);
+    await this.redis.set(
+      `refresh:${refreshToken}`,
+      userId,
+      'EX',
+      30 * 24 * 60 * 60,
+    );
 
     return { accessToken, refreshToken };
   }
