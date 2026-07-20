@@ -1,9 +1,12 @@
 import { type StateCreator } from "zustand";
 
 type AuthSlice = {
-  session: { id: string; name: string } | null;
+  session: { id: string; username: string } | null;
   accessToken: string | null;
-  setSession: (user: { id: string; name: string }, accessToken: string) => void;
+  setSession: (
+    user: { id: string; username: string },
+    accessToken: string,
+  ) => void;
   clearSession: () => void;
 };
 
