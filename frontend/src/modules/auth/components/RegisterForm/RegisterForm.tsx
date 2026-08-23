@@ -18,7 +18,7 @@ function RegisterForm() {
   const registerForm = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      username: "",
+      name: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -30,7 +30,7 @@ function RegisterForm() {
       registerUser({
         email: values.email,
         password: values.password,
-        username: values.username,
+        name: values.name,
       });
     } catch (error) {
       console.error("Form submission error", error);
@@ -47,20 +47,20 @@ function RegisterForm() {
         <h1 className="text-5xl font-bold text-center font-mono">STACK</h1>
         <CardTitle className="text-2xl">Create Account</CardTitle>
 
-        <Field data-invalid={!!registerForm.formState.errors.username}>
-          <FieldLabel htmlFor="username">Username</FieldLabel>
+        <Field data-invalid={!!registerForm.formState.errors.name}>
+          <FieldLabel htmlFor="name">Name</FieldLabel>
           <Input
-            id="username"
+            id="name"
             placeholder="John Doe"
-            autoComplete="username"
-            aria-invalid={!!registerForm.formState.errors.username}
-            aria-describedby="username-error"
-            {...registerForm.register("username")}
+            autoComplete="name"
+            aria-invalid={!!registerForm.formState.errors.name}
+            aria-describedby="name-error"
+            {...registerForm.register("name")}
           />
-          {registerForm.formState.errors.username && (
+          {registerForm.formState.errors.name && (
             <FieldError
-              id="username-error"
-              errors={[registerForm.formState.errors.username]}
+              id="name-error"
+              errors={[registerForm.formState.errors.name]}
             />
           )}
         </Field>

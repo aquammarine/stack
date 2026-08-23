@@ -10,12 +10,12 @@ const useRegister = () => {
     mutationFn: ({
       email,
       password,
-      username,
+      name,
     }: {
       email: string;
       password: string;
-      username: string;
-    }): Promise<{ token: string }> => register(email, password, username),
+      name: string;
+    }): Promise<{ token: string }> => register(email, password, name),
     onSuccess: () => {
       navigate({ to: "/" });
     },

@@ -8,19 +8,19 @@ const login = async (
   const response = await api.post("/auth/login", { email, password });
   useStore
     .getState()
-    .setSession({ id: "test-id", username: "test-name" }, response.data);
+    .setSession({ id: "test-id", name: "test-name" }, response.data);
   return response.data;
 };
 
 const register = async (
   email: string,
   password: string,
-  username: string,
+  name: string,
 ): Promise<{ token: string }> => {
-  const response = await api.post("/auth/register", { email, password, username });
+  const response = await api.post("/auth/register", { email, password, name });
   useStore
     .getState()
-    .setSession({ id: "test-id", username: "test-name" }, response.data);
+    .setSession({ id: "test-id", name: "test-name" }, response.data);
   return response.data;
 };
 
