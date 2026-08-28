@@ -24,13 +24,20 @@ export class AuthController {
     @Body() dto: LoginDto,
     @Res({ passthrough: true }) response: Response,
   ) {
-    const { refreshToken, accessToken } = await this.authService.login(dto);
-    response.cookie('refreshToken', refreshToken, {
+    const { tokens, user } = await this.authService.login(dto);
+    response.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
       sameSite: 'lax',
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
-    return { accessToken };
+
+    response.cookie('accessToken', tokens.accessToken, {
+      httpOnly: true,
+      sameSite: 'lax',
+      maxAge: 15 * 60 * 1000,
+    });
+
+    return { user };
   }
 
   @Post('register')
@@ -38,13 +45,20 @@ export class AuthController {
     @Body() dto: RegisterDto,
     @Res({ passthrough: true }) response: Response,
   ) {
-    const { refreshToken, accessToken } = await this.authService.register(dto);
-    response.cookie('refreshToken', refreshToken, {
+    const { tokens, user } = await this.authService.register(dto);
+    response.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
       sameSite: 'lax',
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
-    return { accessToken };
+
+    response.cookie('accessToken', tokens.accessToken, {
+      httpOnly: true,
+      sameSite: 'lax',
+      maxAge: 15 * 60 * 1000,
+    });
+
+    return { user };
   }
 
   @Post('refresh')
@@ -59,7 +73,12 @@ export class AuthController {
       sameSite: 'lax',
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
-    return { accessToken };
+
+    response.cookie('accessToken', accessToken, {
+      httpOnly: true,
+      sameSite: 'lax',
+      maxAge: 15 * 60 * 1000,
+    });
   }
 
   @Post('logout')
@@ -69,12 +88,13 @@ export class AuthController {
   ) {
     const refreshToken = request.cookies['refreshToken'];
     response.clearCookie('refreshToken');
+    response.clearCookie('accessToken');
     return this.authService.logout(refreshToken);
   }
 
   @Get('me')
   @UseGuards(JwtAuthGuard)
   getMe(@CurrentUser() user: JwtPayload) {
-    return user;
+    return { user: { id: user.id, name: user.name } };
   }
 }

@@ -31,7 +31,10 @@ export class AuthService {
     if (!isPasswordValid)
       throw new BadRequestException('Invalid login or password');
 
-    return this.generateToken(user.id, dto.email);
+    return {
+      tokens: await this.generateToken(user.id, user.email, user.name),
+      user: { id: user.id, name: user.name },
+    };
   }
 
   async register(dto: RegisterDto) {
@@ -44,15 +47,18 @@ export class AuthService {
     const { password, ...rest } = dto;
     const newUser = await this.userService.create({ ...rest, passwordHash });
 
-    return await this.generateToken(newUser.id, newUser.email);
+    return {
+      tokens: await this.generateToken(newUser.id, newUser.email, newUser.name),
+      user: { id: newUser.id, name: newUser.name },
+    };
   }
 
   async logout(refreshToken: string) {
     return await this.redis.del(`refresh:${refreshToken}`);
   }
 
-  async generateToken(userId: string, email: string) {
-    const payload = { sub: userId, email };
+  async generateToken(userId: string, email: string, name: string) {
+    const payload = { sub: userId, email, name };
 
     const accessToken = this.jwt.sign(payload, {
       secret: process.env.JWT_SECRET,
@@ -61,7 +67,12 @@ export class AuthService {
 
     const refreshToken = crypto.randomUUID();
 
-    await this.redis.set(`refresh:${refreshToken}`, userId, 30 * 24 * 60 * 60);
+    await this.redis.set(
+      `refresh:${refreshToken}`,
+      userId,
+      'EX',
+      30 * 24 * 60 * 60,
+    );
 
     return { accessToken, refreshToken };
   }
@@ -77,6 +88,6 @@ export class AuthService {
 
     if (!user) throw new UnauthorizedException();
 
-    return this.generateToken(user.id, user.email);
+    return this.generateToken(user.id, user.email, user.name);
   }
 }
