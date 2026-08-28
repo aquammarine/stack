@@ -1,17 +1,17 @@
 import { type StateCreator } from "zustand";
 
-type AuthSlice = {
+type SessionSlice = {
   session: { id: string; name: string } | null;
   accessToken: string | null;
   setSession: (user: { id: string; name: string }, accessToken: string) => void;
   clearSession: () => void;
 };
 
-const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
+const createSessionSlice: StateCreator<SessionSlice> = (set) => ({
   session: null,
   accessToken: null,
   setSession: (user, accessToken) => set({ session: user, accessToken }),
   clearSession: () => set({ session: null, accessToken: null }),
 });
 
-export { createAuthSlice, type AuthSlice };
+export { createSessionSlice, type SessionSlice };

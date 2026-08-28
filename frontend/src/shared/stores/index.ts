@@ -1,10 +1,10 @@
 import { create } from "zustand";
-import { createAuthSlice, type AuthSlice } from "./authSlice";
+import { createSessionSlice, type SessionSlice } from "./sessionSlice";
 
-type StoreState = AuthSlice;
+type StoreState = SessionSlice;
 
 const useStore = create<StoreState>()((...args) => ({
-  ...createAuthSlice(...args),
+  ...createSessionSlice(...args),
 }));
 
 export { useStore, type StoreState };
