@@ -6,12 +6,6 @@ const login = async (
   password: string,
 ): Promise<{ token: string }> => {
   const response = await api.post("/auth/login", { email, password });
-  useStore
-    .getState()
-    .setSession(
-      { id: response.data.id, name: response.data.name },
-      response.data,
-    );
   return response.data;
 };
 
@@ -21,12 +15,6 @@ const register = async (
   name: string,
 ): Promise<{ token: string }> => {
   const response = await api.post("/auth/register", { email, password, name });
-  useStore
-    .getState()
-    .setSession(
-      { id: response.data.id, name: response.data.name },
-      response.data,
-    );
   return response.data;
 };
 
