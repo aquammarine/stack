@@ -12,7 +12,7 @@ import { Link } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { type loginFormValues, loginSchema } from "../../schemas/login.schema";
-import { useLogin } from "../../hooks/useLogin";
+import { useLogin } from "../../hooks/useLoginMutation";
 
 const LoginForm = () => {
   const { mutate: loginUser } = useLogin();

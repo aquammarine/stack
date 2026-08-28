@@ -10,7 +10,7 @@ import {
 } from "@/modules/auth/schemas/register.schema";
 import { Card, CardTitle } from "@/shared/ui/card";
 import { Link } from "@tanstack/react-router";
-import { useRegister } from "../../hooks/useRegister";
+import { useRegister } from "../../hooks/useRegisterMutation";
 
 function RegisterForm() {
   const { mutate: registerUser } = useRegister();
