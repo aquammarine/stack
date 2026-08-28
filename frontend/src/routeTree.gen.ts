@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TestRouteImport } from './routes/test'
 import { Route as PrivateRouteImport } from './routes/_private'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as PrivateNotesRouteImport } from './routes/_private/notes'
 import { Route as AuthSignupRouteImport } from './routes/_auth/signup'
 import { Route as AuthSigninRouteImport } from './routes/_auth/signin'
 
@@ -22,6 +24,16 @@ const TestRoute = TestRouteImport.update({
 const PrivateRoute = PrivateRouteImport.update({
   id: '/_private',
   getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivateNotesRoute = PrivateNotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => PrivateRoute,
 } as any)
 const AuthSignupRoute = AuthSignupRouteImport.update({
   id: '/_auth/signup',
@@ -35,34 +47,46 @@ const AuthSigninRoute = AuthSigninRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof PrivateRoute
+  '/': typeof IndexRoute
   '/test': typeof TestRoute
   '/signin': typeof AuthSigninRoute
   '/signup': typeof AuthSignupRoute
+  '/notes': typeof PrivateNotesRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof PrivateRoute
+  '/': typeof IndexRoute
   '/test': typeof TestRoute
   '/signin': typeof AuthSigninRoute
   '/signup': typeof AuthSignupRoute
+  '/notes': typeof PrivateNotesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_private': typeof PrivateRoute
+  '/': typeof IndexRoute
+  '/_private': typeof PrivateRouteWithChildren
   '/test': typeof TestRoute
   '/_auth/signin': typeof AuthSigninRoute
   '/_auth/signup': typeof AuthSignupRoute
+  '/_private/notes': typeof PrivateNotesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/test' | '/signin' | '/signup'
+  fullPaths: '/' | '/test' | '/signin' | '/signup' | '/notes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/test' | '/signin' | '/signup'
-  id: '__root__' | '/_private' | '/test' | '/_auth/signin' | '/_auth/signup'
+  to: '/' | '/test' | '/signin' | '/signup' | '/notes'
+  id:
+    | '__root__'
+    | '/'
+    | '/_private'
+    | '/test'
+    | '/_auth/signin'
+    | '/_auth/signup'
+    | '/_private/notes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  PrivateRoute: typeof PrivateRoute
+  IndexRoute: typeof IndexRoute
+  PrivateRoute: typeof PrivateRouteWithChildren
   TestRoute: typeof TestRoute
   AuthSigninRoute: typeof AuthSigninRoute
   AuthSignupRoute: typeof AuthSignupRoute
@@ -84,6 +108,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_private/notes': {
+      id: '/_private/notes'
+      path: '/notes'
+      fullPath: '/notes'
+      preLoaderRoute: typeof PrivateNotesRouteImport
+      parentRoute: typeof PrivateRoute
+    }
     '/_auth/signup': {
       id: '/_auth/signup'
       path: '/signup'
@@ -101,8 +139,20 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface PrivateRouteChildren {
+  PrivateNotesRoute: typeof PrivateNotesRoute
+}
+
+const PrivateRouteChildren: PrivateRouteChildren = {
+  PrivateNotesRoute: PrivateNotesRoute,
+}
+
+const PrivateRouteWithChildren =
+  PrivateRoute._addFileChildren(PrivateRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  PrivateRoute: PrivateRoute,
+  IndexRoute: IndexRoute,
+  PrivateRoute: PrivateRouteWithChildren,
   TestRoute: TestRoute,
   AuthSigninRoute: AuthSigninRoute,
   AuthSignupRoute: AuthSignupRoute,
