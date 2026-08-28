@@ -32,7 +32,7 @@ export class AuthService {
       throw new BadRequestException('Invalid login or password');
 
     return {
-      tokens: await this.generateToken(user.id, user.email),
+      tokens: await this.generateToken(user.id, user.email, user.name),
       user: { id: user.id, name: user.name },
     };
   }
@@ -48,7 +48,7 @@ export class AuthService {
     const newUser = await this.userService.create({ ...rest, passwordHash });
 
     return {
-      tokens: await this.generateToken(newUser.id, newUser.email),
+      tokens: await this.generateToken(newUser.id, newUser.email, newUser.name),
       user: { id: newUser.id, name: newUser.name },
     };
   }
@@ -57,8 +57,8 @@ export class AuthService {
     return await this.redis.del(`refresh:${refreshToken}`);
   }
 
-  async generateToken(userId: string, email: string) {
-    const payload = { sub: userId, email };
+  async generateToken(userId: string, email: string, name: string) {
+    const payload = { sub: userId, email, name };
 
     const accessToken = this.jwt.sign(payload, {
       secret: process.env.JWT_SECRET,
@@ -88,6 +88,6 @@ export class AuthService {
 
     if (!user) throw new UnauthorizedException();
 
-    return this.generateToken(user.id, user.email);
+    return this.generateToken(user.id, user.email, user.name);
   }
 }
