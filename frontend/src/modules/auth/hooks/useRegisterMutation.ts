@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { register } from "../api/auth.api";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
@@ -6,6 +6,7 @@ import { useStore } from "@/shared/stores";
 
 const useRegister = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: ({
@@ -22,6 +23,7 @@ const useRegister = () => {
       useStore
         .getState()
         .setSession({ id: data.user.id, name: data.user.name });
+      queryClient.setQueryData(["me"], data);
       navigate({ to: "/" });
     },
     onError: (error) =>
