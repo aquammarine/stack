@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { Navbar } from "@/shared/components/Navbar";
+import { SessionActions } from "@/modules/auth/components/SessionActions";
 
 export const Route = createFileRoute("/_app")({
   component: RouteComponent,
@@ -8,7 +9,7 @@ export const Route = createFileRoute("/_app")({
 function RouteComponent() {
   return (
     <>
-      <Navbar />
+      <Navbar actions={<SessionActions />} />
       <Outlet />
     </>
   );

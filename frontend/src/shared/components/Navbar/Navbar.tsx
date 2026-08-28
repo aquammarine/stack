@@ -6,32 +6,37 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/shared/ui/navigation-menu";
+import { useSessionQuery } from "@/modules/auth/hooks/useSessionQuery";
 
 type NavbarProps = {
   actions?: ReactNode;
 };
 
 const Navbar = ({ actions }: NavbarProps) => {
+  const { data } = useSessionQuery();
+
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-sm">
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
         <Link
           to="/"
-          className="text-base font-semibold tracking-tight text-foreground"
+          className="text-2xl font-semibold tracking-tight text-foreground"
         >
-          Stack
+          STACK
         </Link>
 
         <NavigationMenu>
           <NavigationMenuList className="gap-1">
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                render={<Link to="/notes" />}
-                className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground"
-              >
-                Notes
-              </NavigationMenuLink>
-            </NavigationMenuItem>
+            {data?.user && (
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  render={<Link to="/notes" />}
+                  className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground"
+                >
+                  Notes
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            )}
           </NavigationMenuList>
         </NavigationMenu>
 
