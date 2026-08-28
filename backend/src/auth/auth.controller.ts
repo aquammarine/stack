@@ -30,7 +30,12 @@ export class AuthController {
       sameSite: 'lax',
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
-    return { accessToken };
+
+    response.cookie('accessToken', accessToken, {
+      httpOnly: true,
+      sameSite: 'lax',
+      maxAge: 15 * 60 * 1000,
+    });
   }
 
   @Post('register')
@@ -44,7 +49,12 @@ export class AuthController {
       sameSite: 'lax',
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
-    return { accessToken };
+
+    response.cookie('accessToken', accessToken, {
+      httpOnly: true,
+      sameSite: 'lax',
+      maxAge: 15 * 60 * 1000,
+    });
   }
 
   @Post('refresh')
@@ -59,7 +69,12 @@ export class AuthController {
       sameSite: 'lax',
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
-    return { accessToken };
+
+    response.cookie('accessToken', accessToken, {
+      httpOnly: true,
+      sameSite: 'lax',
+      maxAge: 15 * 60 * 1000,
+    });
   }
 
   @Post('logout')
