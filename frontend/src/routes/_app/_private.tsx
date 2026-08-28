@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-router";
 import { sessionQueryOptions } from "@/modules/auth/queries/sessionQueryOptions";
 
-export const Route = createFileRoute("/_private")({
+export const Route = createFileRoute("/_app/_private")({
   beforeLoad: async ({ context }) => {
     try {
       await context.queryClient.ensureQueryData(sessionQueryOptions);
