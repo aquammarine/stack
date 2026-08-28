@@ -1,12 +1,22 @@
 import { Link } from "@tanstack/react-router";
+import { Button } from "@/shared/ui";
 
 const LandingPage = () => {
   return (
-    <div>
-      <h1>Welcome</h1>
-      <p>Sign in or create an account to get started.</p>
-      <Link to="/signin">Sign in</Link>
-      <Link to="/signup">Sign up</Link>
+    <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-3xl flex-col items-center justify-center px-6 text-center">
+      <h1 className="font-mono text-5xl font-bold tracking-tight">STACK</h1>
+      <p className="mt-4 max-w-md text-lg text-muted-foreground">
+        Capture what you learn and find it again when you need it.
+      </p>
+
+      <div className="mt-8 flex items-center gap-3">
+        <Button variant="default" size="lg" render={<Link to="/signup" />}>
+          Get started
+        </Button>
+        <Button variant="ghost" size="lg" render={<Link to="/signin" />}>
+          Sign in
+        </Button>
+      </div>
     </div>
   );
 };
