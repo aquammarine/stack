@@ -9,13 +9,10 @@ import { sessionQueryOptions } from "@/modules/auth/queries/sessionQueryOptions"
 export const Route = createFileRoute("/_private")({
   beforeLoad: async ({ context }) => {
     try {
-      const isLoggedIn =
-        context.queryClient.ensureQueryData(sessionQueryOptions);
-      if (!isLoggedIn) {
-        throw redirect({ to: "/signin" });
-      }
+      await context.queryClient.ensureQueryData(sessionQueryOptions);
     } catch (err) {
       if (isRedirect(err)) throw err;
+      throw redirect({ to: "/signin" });
     }
   },
   component: RouteComponent,
