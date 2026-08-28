@@ -1,0 +1,1 @@
+export { PrivateHomePage } from "./PrivateHomePage";
