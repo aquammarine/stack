@@ -11,7 +11,7 @@ const useLogout = () => {
   return useMutation({
     mutationFn: logout,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["me"] });
+      queryClient.setQueryData(["me"], { user: null });
       useStore.getState().clearSession();
       navigate({ to: "/" });
     },
