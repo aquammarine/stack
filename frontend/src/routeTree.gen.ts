@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TestRouteImport } from './routes/_test'
+import { Route as TestRouteImport } from './routes/test'
+import { Route as PrivateRouteImport } from './routes/_private'
 import { Route as AuthSignupRouteImport } from './routes/_auth/signup'
 import { Route as AuthSigninRouteImport } from './routes/_auth/signin'
 
 const TestRoute = TestRouteImport.update({
-  id: '/_test',
+  id: '/test',
+  path: '/test',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivateRoute = PrivateRouteImport.update({
+  id: '/_private',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthSignupRoute = AuthSignupRouteImport.update({
@@ -29,30 +35,34 @@ const AuthSigninRoute = AuthSigninRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof TestRoute
+  '/': typeof PrivateRoute
+  '/test': typeof TestRoute
   '/signin': typeof AuthSigninRoute
   '/signup': typeof AuthSignupRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof TestRoute
+  '/': typeof PrivateRoute
+  '/test': typeof TestRoute
   '/signin': typeof AuthSigninRoute
   '/signup': typeof AuthSignupRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_test': typeof TestRoute
+  '/_private': typeof PrivateRoute
+  '/test': typeof TestRoute
   '/_auth/signin': typeof AuthSigninRoute
   '/_auth/signup': typeof AuthSignupRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/signin' | '/signup'
+  fullPaths: '/' | '/test' | '/signin' | '/signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/signin' | '/signup'
-  id: '__root__' | '/_test' | '/_auth/signin' | '/_auth/signup'
+  to: '/' | '/test' | '/signin' | '/signup'
+  id: '__root__' | '/_private' | '/test' | '/_auth/signin' | '/_auth/signup'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  PrivateRoute: typeof PrivateRoute
   TestRoute: typeof TestRoute
   AuthSigninRoute: typeof AuthSigninRoute
   AuthSignupRoute: typeof AuthSignupRoute
@@ -60,11 +70,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_test': {
-      id: '/_test'
+    '/test': {
+      id: '/test'
+      path: '/test'
+      fullPath: '/test'
+      preLoaderRoute: typeof TestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_private': {
+      id: '/_private'
       path: ''
       fullPath: '/'
-      preLoaderRoute: typeof TestRouteImport
+      preLoaderRoute: typeof PrivateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth/signup': {
@@ -85,6 +102,7 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  PrivateRoute: PrivateRoute,
   TestRoute: TestRoute,
   AuthSigninRoute: AuthSigninRoute,
   AuthSignupRoute: AuthSignupRoute,
