@@ -23,4 +23,11 @@ const logout = async (): Promise<void> => {
   await api.post("/auth/logout");
 };
 
-export { login, register, logout };
+const getMe = async (): Promise<{
+  user: { id: string; name: string } | null;
+}> => {
+  const response = await api.get("/auth/me");
+  return response.data;
+};
+
+export { login, register, logout, getMe };
