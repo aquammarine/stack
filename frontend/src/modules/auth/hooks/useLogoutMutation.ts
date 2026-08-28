@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { logout } from "../api/auth.api";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
+import { useStore } from "@/shared/stores";
 
 const useLogout = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const useLogout = () => {
     mutationFn: logout,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["me"] });
+      useStore.getState().clearSession();
       navigate({ to: "/" });
     },
     onError: (error) =>
