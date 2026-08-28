@@ -5,8 +5,8 @@ import { createFileRoute, isRedirect, redirect } from "@tanstack/react-router";
 export const Route = createFileRoute("/_auth/signin")({
   beforeLoad: async ({ context }) => {
     try {
-      await context.queryClient.ensureQueryData(sessionQueryOptions);
-      throw redirect({ to: "/" });
+      const data = await context.queryClient.ensureQueryData(sessionQueryOptions);
+      if (data.user) throw redirect({ to: "/" });
     } catch (err) {
       if (isRedirect(err)) throw err;
     }
