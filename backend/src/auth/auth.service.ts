@@ -31,7 +31,10 @@ export class AuthService {
     if (!isPasswordValid)
       throw new BadRequestException('Invalid login or password');
 
-    return this.generateToken(user.id, dto.email);
+    return {
+      tokens: await this.generateToken(user.id, user.email),
+      user: { id: user.id, name: user.name },
+    };
   }
 
   async register(dto: RegisterDto) {
@@ -44,7 +47,10 @@ export class AuthService {
     const { password, ...rest } = dto;
     const newUser = await this.userService.create({ ...rest, passwordHash });
 
-    return await this.generateToken(newUser.id, newUser.email);
+    return {
+      tokens: await this.generateToken(newUser.id, newUser.email),
+      user: { id: newUser.id, name: newUser.name },
+    };
   }
 
   async logout(refreshToken: string) {
