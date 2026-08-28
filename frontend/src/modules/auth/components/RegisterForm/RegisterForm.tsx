@@ -13,7 +13,7 @@ import { Link } from "@tanstack/react-router";
 import { useRegister } from "../../hooks/useRegisterMutation";
 
 function RegisterForm() {
-  const { mutate: registerUser } = useRegister();
+  const { mutate: registerUser, isPending } = useRegister();
 
   const registerForm = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -124,7 +124,7 @@ function RegisterForm() {
 
         <Button
           type="submit"
-          disabled={registerForm.formState.isSubmitting}
+          disabled={isPending}
           className="w-full"
           size="lg"
         >

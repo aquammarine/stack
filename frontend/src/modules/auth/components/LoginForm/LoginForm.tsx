@@ -15,7 +15,7 @@ import { type loginFormValues, loginSchema } from "../../schemas/login.schema";
 import { useLogin } from "../../hooks/useLoginMutation";
 
 const LoginForm = () => {
-  const { mutate: loginUser } = useLogin();
+  const { mutate: loginUser, isPending } = useLogin();
 
   const loginForm = useForm<loginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -84,12 +84,7 @@ const LoginForm = () => {
           )}
         </Field>
 
-        <Button
-          type="submit"
-          disabled={loginForm.formState.isSubmitting}
-          className="w-full"
-          size="lg"
-        >
+        <Button type="submit" disabled={isPending} className="w-full" size="lg">
           Submit
         </Button>
 
