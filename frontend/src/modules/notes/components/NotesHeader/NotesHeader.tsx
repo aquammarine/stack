@@ -1,4 +1,5 @@
 import { Button, Input } from "@/shared/ui";
+import { Link } from "@tanstack/react-router";
 import { CreateNoteDialog } from "../CreateNoteDialog";
 
 interface NotesHeaderProps {
@@ -23,7 +24,9 @@ const NotesHeader = ({ search, onChange }: NotesHeaderProps) => {
           value={search}
           onChange={(e) => onChange(e.target.value)}
         />
-        <Button variant="outline">Study</Button>
+        <Button variant="outline" render={<Link to="/study" />}>
+          Study
+        </Button>
         <CreateNoteDialog />
       </div>
     </div>

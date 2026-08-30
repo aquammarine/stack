@@ -15,6 +15,7 @@ import { Route as AppIndexRouteImport } from './routes/_app/index'
 import { Route as AuthSignupRouteImport } from './routes/_auth/signup'
 import { Route as AuthSigninRouteImport } from './routes/_auth/signin'
 import { Route as AppPrivateRouteImport } from './routes/_app/_private'
+import { Route as AppPrivateStudyRouteImport } from './routes/_app/_private/study'
 import { Route as AppPrivateNotesRouteImport } from './routes/_app/_private/notes'
 
 const TestRoute = TestRouteImport.update({
@@ -45,6 +46,11 @@ const AppPrivateRoute = AppPrivateRouteImport.update({
   id: '/_private',
   getParentRoute: () => AppRoute,
 } as any)
+const AppPrivateStudyRoute = AppPrivateStudyRouteImport.update({
+  id: '/study',
+  path: '/study',
+  getParentRoute: () => AppPrivateRoute,
+} as any)
 const AppPrivateNotesRoute = AppPrivateNotesRouteImport.update({
   id: '/notes',
   path: '/notes',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/signin': typeof AuthSigninRoute
   '/signup': typeof AuthSignupRoute
   '/notes': typeof AppPrivateNotesRoute
+  '/study': typeof AppPrivateStudyRoute
 }
 export interface FileRoutesByTo {
   '/test': typeof TestRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByTo {
   '/signin': typeof AuthSigninRoute
   '/signup': typeof AuthSignupRoute
   '/notes': typeof AppPrivateNotesRoute
+  '/study': typeof AppPrivateStudyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -74,12 +82,13 @@ export interface FileRoutesById {
   '/_auth/signup': typeof AuthSignupRoute
   '/_app/': typeof AppIndexRoute
   '/_app/_private/notes': typeof AppPrivateNotesRoute
+  '/_app/_private/study': typeof AppPrivateStudyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/test' | '/signin' | '/signup' | '/notes'
+  fullPaths: '/' | '/test' | '/signin' | '/signup' | '/notes' | '/study'
   fileRoutesByTo: FileRoutesByTo
-  to: '/test' | '/' | '/signin' | '/signup' | '/notes'
+  to: '/test' | '/' | '/signin' | '/signup' | '/notes' | '/study'
   id:
     | '__root__'
     | '/_app'
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/_auth/signup'
     | '/_app/'
     | '/_app/_private/notes'
+    | '/_app/_private/study'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -142,6 +152,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppPrivateRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/_private/study': {
+      id: '/_app/_private/study'
+      path: '/study'
+      fullPath: '/study'
+      preLoaderRoute: typeof AppPrivateStudyRouteImport
+      parentRoute: typeof AppPrivateRoute
+    }
     '/_app/_private/notes': {
       id: '/_app/_private/notes'
       path: '/notes'
@@ -154,10 +171,12 @@ declare module '@tanstack/react-router' {
 
 interface AppPrivateRouteChildren {
   AppPrivateNotesRoute: typeof AppPrivateNotesRoute
+  AppPrivateStudyRoute: typeof AppPrivateStudyRoute
 }
 
 const AppPrivateRouteChildren: AppPrivateRouteChildren = {
   AppPrivateNotesRoute: AppPrivateNotesRoute,
+  AppPrivateStudyRoute: AppPrivateStudyRoute,
 }
 
 const AppPrivateRouteWithChildren = AppPrivateRoute._addFileChildren(
