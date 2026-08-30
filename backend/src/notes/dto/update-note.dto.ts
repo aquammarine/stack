@@ -1,8 +1,10 @@
 import {
+  IsArray,
   IsEnum,
   IsOptional,
   IsString,
   IsUrl,
+  IsUUID,
   MinLength,
 } from 'class-validator';
 import { NoteType } from '../../generated/enums';
@@ -24,4 +26,9 @@ export class UpdateNoteDto {
   @IsUrl()
   @IsOptional()
   sourceUrl?: string;
+
+  @IsArray()
+  @IsUUID('4', { each: true })
+  @IsOptional()
+  tagIds?: string[];
 }
