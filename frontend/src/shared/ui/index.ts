@@ -1,3 +1,4 @@
+export { Badge } from "./badge";
 export { Button } from "./button";
 export { Input } from "./input";
 export { Label } from "./label";
@@ -11,3 +12,15 @@ export {
   CardHeader,
   CardTitle,
 } from "./card";
+export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+} from "./dialog";
