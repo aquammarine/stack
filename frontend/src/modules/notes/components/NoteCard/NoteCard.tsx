@@ -1,6 +1,5 @@
 import {
   Badge,
-  Button,
   Card,
   CardContent,
   CardFooter,
@@ -14,6 +13,7 @@ import { formatUpdateTime } from "@/modules/notes/utils/formatUpdateTime";
 import { NoteDetailDialog } from "@/modules/notes/components/NoteDetailDialog";
 import { useDeleteNoteMutation } from "../../hooks/useDeleteNoteMutation";
 import { DeleteNoteAlertDialog } from "@/modules/notes/components/DeleteNoteAlertDialog";
+import { EditNoteDialog } from "@/modules/notes/components/EditNoteDialog";
 
 type NoteCardProps = {
   note: Note;
@@ -55,9 +55,7 @@ const NoteCard = ({ note }: NoteCardProps) => {
           Updated {formattedUpdateTime} ago
         </span>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
-            Edit
-          </Button>
+          <EditNoteDialog note={note} />
           <DeleteNoteAlertDialog onConfirm={onDelete} />
         </div>
       </CardFooter>

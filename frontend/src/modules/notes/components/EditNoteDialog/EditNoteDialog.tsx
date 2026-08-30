@@ -19,41 +19,53 @@ import {
   Textarea,
 } from "@/shared/ui";
 import { NoteType } from "@/modules/notes/types";
-import {
-  createNoteSchema,
-  type CreateNoteFormValues,
-} from "../../schemas/note.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
+import type { Note } from "@/modules/notes/types";
 import { useForm, Controller } from "react-hook-form";
-import { useCreateNoteMutation } from "../../hooks/useCreateNoteMutation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  updateNoteSchema,
+  type UpdateNoteFormValues,
+} from "../../schemas/note.schema";
+import { useUpdateNoteMutation } from "../../hooks/useUpdateNoteMutation";
 import { useState } from "react";
 
-const CreateNoteDialog = () => {
-  const [open, setOpen] = useState<boolean>(false);
+type EditNoteDialogProps = {
+  note: Note;
+};
 
-  const form = useForm<CreateNoteFormValues>({
-    resolver: zodResolver(createNoteSchema),
-    defaultValues: { title: "", content: "", noteType: NoteType.TEXT },
+const EditNoteDialog = ({ note }: EditNoteDialogProps) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const { mutate } = useUpdateNoteMutation();
+
+  const form = useForm<UpdateNoteFormValues>({
+    resolver: zodResolver(updateNoteSchema),
+    defaultValues: {
+      title: note.title,
+      noteType: note.noteType,
+      content: note.content,
+      sourceUrl: note.sourceUrl,
+    },
   });
 
-  const { mutate } = useCreateNoteMutation();
-
-  const onSubmit = (values: CreateNoteFormValues) =>
+  const onSubmit = (values: UpdateNoteFormValues) =>
     mutate(
-      { data: { ...values, sourceUrl: values.sourceUrl || undefined } },
+      {
+        id: note.id,
+        data: { ...values, sourceUrl: values.sourceUrl || undefined },
+      },
       { onSuccess: () => setOpen(false) },
     );
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button variant="default" />}>
-        Add card
+      <DialogTrigger render={<Button variant="outline" size="sm" />}>
+        Edit
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>New note</DialogTitle>
-          <DialogDescription>Add a note to your collection.</DialogDescription>
+          <DialogTitle>Edit note</DialogTitle>
+          <DialogDescription>Update this note's details.</DialogDescription>
         </DialogHeader>
 
         <form
@@ -61,11 +73,10 @@ const CreateNoteDialog = () => {
           className="flex flex-col gap-4"
         >
           <Field data-invalid={!!form.formState.errors.title}>
-            <FieldLabel htmlFor="note-title">Title</FieldLabel>
+            <FieldLabel htmlFor="edit-note-title">Title</FieldLabel>
             <Input
               {...form.register("title")}
-              id="note-title"
-              placeholder="What does CSS stand for?"
+              id="edit-note-title"
               aria-invalid={!!form.formState.errors.title}
             />
             {form.formState.errors.title && (
@@ -74,17 +85,17 @@ const CreateNoteDialog = () => {
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="note-type">Type</FieldLabel>
+            <FieldLabel htmlFor="edit-note-type">Type</FieldLabel>
             <Controller
               control={form.control}
               name="noteType"
               render={({ field }) => (
                 <Select
-                  defaultValue={NoteType.TEXT}
+                  defaultValue={note.noteType}
                   value={field.value}
                   onValueChange={field.onChange}
                 >
-                  <SelectTrigger id="note-type" className="w-full">
+                  <SelectTrigger id="edit-note-type" className="w-full">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent alignItemWithTrigger={false}>
@@ -98,11 +109,10 @@ const CreateNoteDialog = () => {
           </Field>
 
           <Field data-invalid={!!form.formState.errors.content}>
-            <FieldLabel htmlFor="note-content">Content</FieldLabel>
+            <FieldLabel htmlFor="edit-note-content">Content</FieldLabel>
             <Textarea
               {...form.register("content")}
-              id="note-content"
-              placeholder="Cascading Style Sheets."
+              id="edit-note-content"
               className="min-h-28"
               aria-invalid={!!form.formState.errors.content}
             />
@@ -112,12 +122,12 @@ const CreateNoteDialog = () => {
           </Field>
 
           <Field data-invalid={!!form.formState.errors.sourceUrl}>
-            <FieldLabel htmlFor="note-source-url">
+            <FieldLabel htmlFor="edit-note-source-url">
               Source URL (optional)
             </FieldLabel>
             <Input
               {...form.register("sourceUrl")}
-              id="note-source-url"
+              id="edit-note-source-url"
               type="url"
               placeholder="https://developer.mozilla.org/..."
               aria-invalid={!!form.formState.errors.sourceUrl}
@@ -129,7 +139,7 @@ const CreateNoteDialog = () => {
 
           <DialogFooter>
             <Button type="submit" variant="default">
-              Create note
+              Save changes
             </Button>
           </DialogFooter>
         </form>
@@ -138,4 +148,5 @@ const CreateNoteDialog = () => {
   );
 };
 
-export { CreateNoteDialog };
+export { EditNoteDialog };
+export type { EditNoteDialogProps };

@@ -12,4 +12,4 @@ export const createNoteSchema = noteSchema;
 export const updateNoteSchema = noteSchema.partial();
 
 export type CreateNoteFormValues = z.infer<typeof createNoteSchema>;
-export type updateNoteFormValues = z.infer<typeof updateNoteSchema>;
+export type UpdateNoteFormValues = z.infer<typeof updateNoteSchema>;
