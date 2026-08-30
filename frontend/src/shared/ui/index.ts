@@ -51,3 +51,4 @@ export {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./alert-dialog";
+export { Skeleton } from "./skeleton";
