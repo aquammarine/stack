@@ -7,25 +7,23 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
-  Button,
 } from "@/shared/ui";
 
 type DeleteNoteAlertDialogProps = {
   onConfirm: () => void;
   isPending?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 };
 
 const DeleteNoteAlertDialog = ({
   onConfirm,
   isPending,
+  open,
+  onOpenChange,
 }: DeleteNoteAlertDialogProps) => {
   return (
-    <AlertDialog>
-      <AlertDialogTrigger render={<Button variant="destructive" size="sm" />}>
-        Delete
-      </AlertDialogTrigger>
-
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Delete this note?</AlertDialogTitle>

@@ -1,5 +1,6 @@
 import {
   Badge,
+  Button,
   Card,
   CardContent,
   CardFooter,
@@ -14,12 +15,16 @@ import { NoteDetailDialog } from "@/modules/notes/components/NoteDetailDialog";
 import { useDeleteNoteMutation } from "../../hooks/useDeleteNoteMutation";
 import { DeleteNoteAlertDialog } from "@/modules/notes/components/DeleteNoteAlertDialog";
 import { EditNoteDialog } from "@/modules/notes/components/EditNoteDialog";
+import { useState } from "react";
 
 type NoteCardProps = {
   note: Note;
 };
 
 const NoteCard = ({ note }: NoteCardProps) => {
+  const [detailOpen, setDetailOpen] = useState<boolean>(false);
+  const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
+
   const { id, title, noteType, content, updatedAt } = note;
   const formattedUpdateTime = formatUpdateTime(updatedAt);
   const { mutate, isPending } = useDeleteNoteMutation();
@@ -30,7 +35,7 @@ const NoteCard = ({ note }: NoteCardProps) => {
 
   return (
     <Card className="h-44 transition-colors hover:ring-foreground/20">
-      <Dialog>
+      <Dialog open={detailOpen} onOpenChange={setDetailOpen}>
         <DialogTrigger
           render={<div className="flex flex-1 cursor-pointer flex-col" />}
         >
@@ -47,8 +52,15 @@ const NoteCard = ({ note }: NoteCardProps) => {
           </CardContent>
         </DialogTrigger>
 
-        <NoteDetailDialog note={note} />
+        <NoteDetailDialog note={note} setConfirmOpen={setConfirmOpen} />
       </Dialog>
+
+      <DeleteNoteAlertDialog
+        open={confirmOpen}
+        onOpenChange={setConfirmOpen}
+        onConfirm={onDelete}
+        isPending={isPending}
+      />
 
       <CardFooter className="flex items-center justify-between">
         <span className="text-xs text-muted-foreground">
@@ -56,7 +68,13 @@ const NoteCard = ({ note }: NoteCardProps) => {
         </span>
         <div className="flex items-center gap-2">
           <EditNoteDialog note={note} />
-          <DeleteNoteAlertDialog onConfirm={onDelete} isPending={isPending} />
+          <Button
+            variant="destructive"
+            size="sm"
+            onClick={() => setConfirmOpen(true)}
+          >
+            Delete
+          </Button>
         </div>
       </CardFooter>
     </Card>

@@ -10,12 +10,12 @@ import {
 } from "@/shared/ui";
 import type { Note } from "@/modules/notes/types";
 import { formatUpdateTime } from "@/modules/notes/utils/formatUpdateTime";
-
 type NoteDetailDialogProps = {
   note: Note;
+  setConfirmOpen: (open: boolean) => void;
 };
 
-const NoteDetailDialog = ({ note }: NoteDetailDialogProps) => {
+const NoteDetailDialog = ({ note, setConfirmOpen }: NoteDetailDialogProps) => {
   const { title, noteType, content, sourceUrl, updatedAt } = note;
   const formattedUpdatedAt = formatUpdateTime(updatedAt);
 
@@ -60,7 +60,11 @@ const NoteDetailDialog = ({ note }: NoteDetailDialogProps) => {
         <Button variant="outline" size="sm">
           Edit
         </Button>
-        <Button variant="destructive" size="sm">
+        <Button
+          variant="destructive"
+          size="sm"
+          onClick={() => setConfirmOpen(true)}
+        >
           Delete
         </Button>
       </DialogFooter>
