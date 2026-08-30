@@ -27,3 +27,8 @@ export const updateNote = async (
 export const deleteNote = async (id: string): Promise<void> => {
   await api.delete(`/notes/${id}`);
 };
+
+export const searchNote = async (query: string): Promise<Note[]> => {
+  const response = await api.get("/search", { params: { q: query } });
+  return response.data;
+};

@@ -1,7 +1,12 @@
 import { Button, Input } from "@/shared/ui";
-import { CreateNoteDialog } from "@/modules/notes/components/CreateNoteDialog";
+import { CreateNoteDialog } from "../CreateNoteDialog";
 
-const NotesHeader = () => {
+interface NotesHeaderProps {
+  search: string;
+  onChange: (value: string) => void;
+}
+
+const NotesHeader = ({ search, onChange }: NotesHeaderProps) => {
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div>
@@ -12,7 +17,12 @@ const NotesHeader = () => {
       </div>
 
       <div className="flex items-center gap-3">
-        <Input placeholder="Search notes..." className="w-56" />
+        <Input
+          placeholder="Search notes..."
+          className="w-56"
+          value={search}
+          onChange={(e) => onChange(e.target.value)}
+        />
         <Button variant="outline">Study</Button>
         <CreateNoteDialog />
       </div>
