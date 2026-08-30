@@ -12,18 +12,25 @@ import {
 import type { Note } from "@/modules/notes/types";
 import { formatUpdateTime } from "@/modules/notes/utils/formatUpdateTime";
 import { NoteDetailDialog } from "@/modules/notes/components/NoteDetailDialog";
+import { useDeleteNoteMutation } from "../../hooks/useDeleteNoteMutation";
+import { DeleteNoteAlertDialog } from "@/modules/notes/components/DeleteNoteAlertDialog";
 
 type NoteCardProps = {
   note: Note;
 };
 
 const NoteCard = ({ note }: NoteCardProps) => {
-  const { title, noteType, content, updatedAt } = note;
+  const { id, title, noteType, content, updatedAt } = note;
   const formattedUpdateTime = formatUpdateTime(updatedAt);
+  const { mutate } = useDeleteNoteMutation();
+
+  const onDelete = () => {
+    mutate({ id });
+  };
 
   return (
-    <Dialog>
-      <Card className="h-44 transition-colors hover:ring-foreground/20">
+    <Card className="h-44 transition-colors hover:ring-foreground/20">
+      <Dialog>
         <DialogTrigger
           render={<div className="flex flex-1 cursor-pointer flex-col" />}
         >
@@ -39,23 +46,22 @@ const NoteCard = ({ note }: NoteCardProps) => {
             </p>
           </CardContent>
         </DialogTrigger>
-        <CardFooter className="flex items-center justify-between">
-          <span className="text-xs text-muted-foreground">
-            Updated {formattedUpdateTime}
-          </span>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
-              Edit
-            </Button>
-            <Button variant="destructive" size="sm">
-              Delete
-            </Button>
-          </div>
-        </CardFooter>
-      </Card>
 
-      <NoteDetailDialog note={note} />
-    </Dialog>
+        <NoteDetailDialog note={note} />
+      </Dialog>
+
+      <CardFooter className="flex items-center justify-between">
+        <span className="text-xs text-muted-foreground">
+          Updated {formattedUpdateTime} ago
+        </span>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm">
+            Edit
+          </Button>
+          <DeleteNoteAlertDialog onConfirm={onDelete} />
+        </div>
+      </CardFooter>
+    </Card>
   );
 };
 

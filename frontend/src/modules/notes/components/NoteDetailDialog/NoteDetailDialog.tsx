@@ -28,7 +28,7 @@ const NoteDetailDialog = ({ note }: NoteDetailDialogProps) => {
             {noteType}
           </Badge>
         </div>
-        <DialogDescription>Updated {formattedUpdatedAt}</DialogDescription>
+        <DialogDescription>Updated {formattedUpdatedAt} ago</DialogDescription>
       </DialogHeader>
 
       <Separator />
