@@ -1,0 +1,24 @@
+{
+  "name": "stack",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/aquammarine/stack#readme",
+  "bugs": {
+    "url": "https://github.com/aquammarine/stack/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aquammarine/stack.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev:backend": "pnpm --filter backend start:dev"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  }
+}
