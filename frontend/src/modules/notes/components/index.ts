@@ -5,3 +5,4 @@ export { NotesGrid } from "./NotesGrid";
 export { EmptyState } from "./EmptyState";
 export { NoteDetailDialog } from "./NoteDetailDialog";
 export type { NoteDetailDialogProps } from "./NoteDetailDialog";
+export { CreateNoteDialog } from "./CreateNoteDialog";

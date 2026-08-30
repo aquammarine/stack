@@ -1,4 +1,4 @@
-import { Button } from "@/shared/ui";
+import { CreateNoteDialog } from "@/modules/notes/components/CreateNoteDialog";
 
 const EmptyState = () => {
   return (
@@ -7,9 +7,9 @@ const EmptyState = () => {
       <p className="text-sm text-muted-foreground">
         Create your first note to get started.
       </p>
-      <Button variant="default" className="mt-4">
-        Add card
-      </Button>
+      <div className="mt-4">
+        <CreateNoteDialog />
+      </div>
     </div>
   );
 };

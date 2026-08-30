@@ -1,4 +1,5 @@
 import { Button, Input } from "@/shared/ui";
+import { CreateNoteDialog } from "@/modules/notes/components/CreateNoteDialog";
 
 const NotesHeader = () => {
   return (
@@ -13,7 +14,7 @@ const NotesHeader = () => {
       <div className="flex items-center gap-3">
         <Input placeholder="Search notes..." className="w-56" />
         <Button variant="outline">Study</Button>
-        <Button variant="default">Add card</Button>
+        <CreateNoteDialog />
       </div>
     </div>
   );
