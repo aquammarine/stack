@@ -22,7 +22,7 @@ type NoteCardProps = {
 const NoteCard = ({ note }: NoteCardProps) => {
   const { id, title, noteType, content, updatedAt } = note;
   const formattedUpdateTime = formatUpdateTime(updatedAt);
-  const { mutate } = useDeleteNoteMutation();
+  const { mutate, isPending } = useDeleteNoteMutation();
 
   const onDelete = () => {
     mutate({ id });
@@ -56,7 +56,7 @@ const NoteCard = ({ note }: NoteCardProps) => {
         </span>
         <div className="flex items-center gap-2">
           <EditNoteDialog note={note} />
-          <DeleteNoteAlertDialog onConfirm={onDelete} />
+          <DeleteNoteAlertDialog onConfirm={onDelete} isPending={isPending} />
         </div>
       </CardFooter>
     </Card>

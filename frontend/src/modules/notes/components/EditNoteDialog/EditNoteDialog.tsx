@@ -35,7 +35,7 @@ type EditNoteDialogProps = {
 
 const EditNoteDialog = ({ note }: EditNoteDialogProps) => {
   const [open, setOpen] = useState<boolean>(false);
-  const { mutate } = useUpdateNoteMutation();
+  const { mutate, isPending } = useUpdateNoteMutation();
 
   const form = useForm<UpdateNoteFormValues>({
     resolver: zodResolver(updateNoteSchema),
@@ -138,7 +138,7 @@ const EditNoteDialog = ({ note }: EditNoteDialogProps) => {
           </Field>
 
           <DialogFooter>
-            <Button type="submit" variant="default">
+            <Button type="submit" variant="default" disabled={isPending}>
               Save changes
             </Button>
           </DialogFooter>

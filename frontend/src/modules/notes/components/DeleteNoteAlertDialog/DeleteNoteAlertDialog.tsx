@@ -13,9 +13,13 @@ import {
 
 type DeleteNoteAlertDialogProps = {
   onConfirm: () => void;
+  isPending?: boolean;
 };
 
-const DeleteNoteAlertDialog = ({ onConfirm }: DeleteNoteAlertDialogProps) => {
+const DeleteNoteAlertDialog = ({
+  onConfirm,
+  isPending,
+}: DeleteNoteAlertDialogProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger render={<Button variant="destructive" size="sm" />}>
@@ -32,7 +36,11 @@ const DeleteNoteAlertDialog = ({ onConfirm }: DeleteNoteAlertDialogProps) => {
 
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction variant="destructive" onClick={onConfirm}>
+          <AlertDialogAction
+            variant="destructive"
+            onClick={onConfirm}
+            disabled={isPending}
+          >
             Delete
           </AlertDialogAction>
         </AlertDialogFooter>

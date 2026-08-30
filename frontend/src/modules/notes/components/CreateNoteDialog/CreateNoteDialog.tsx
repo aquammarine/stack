@@ -36,7 +36,7 @@ const CreateNoteDialog = () => {
     defaultValues: { title: "", content: "", noteType: NoteType.TEXT },
   });
 
-  const { mutate } = useCreateNoteMutation();
+  const { mutate, isPending } = useCreateNoteMutation();
 
   const onSubmit = (values: CreateNoteFormValues) =>
     mutate(
@@ -128,7 +128,7 @@ const CreateNoteDialog = () => {
           </Field>
 
           <DialogFooter>
-            <Button type="submit" variant="default">
+            <Button type="submit" variant="default" disabled={isPending}>
               Create note
             </Button>
           </DialogFooter>
