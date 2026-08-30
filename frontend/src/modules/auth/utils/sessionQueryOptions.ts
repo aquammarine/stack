@@ -1,4 +1,4 @@
-import { getMe } from "../auth.api";
+import { getMe } from "../api";
 
 const sessionQueryOptions = {
   queryKey: ["me"],

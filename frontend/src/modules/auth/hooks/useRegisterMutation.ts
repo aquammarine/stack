@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { register } from "../auth.api";
+import { register } from "../api";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { useStore } from "@/shared/stores";
